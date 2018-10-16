@@ -1,0 +1,1 @@
+/usr/bin/g++-5   -g  -static -Wl,--gc-sections -Wreturn-local-addr -DDEBUG -DLINKER_FLAGS CMakeFiles/Templete_2-9.dir/main.cpp.o  -o Templete_2-9 
