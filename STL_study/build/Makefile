@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/issuh/Project/STL_study
+CMAKE_SOURCE_DIR = /home/issuh/Project/Study/STL_study
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/issuh/Project/STL_study/build
+CMAKE_BINARY_DIR = /home/issuh/Project/Study/STL_study/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/issuh/Project/STL_study/build/CMakeFiles /home/issuh/Project/STL_study/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/issuh/Project/Study/STL_study/build/CMakeFiles /home/issuh/Project/Study/STL_study/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/issuh/Project/STL_study/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/issuh/Project/Study/STL_study/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -188,6 +188,71 @@ Templete_2-9/fast:
 	$(MAKE) -f src/2-9/CMakeFiles/Templete_2-9.dir/build.make src/2-9/CMakeFiles/Templete_2-9.dir/build
 .PHONY : Templete_2-9/fast
 
+#=============================================================================
+# Target rules for targets named Templete_3-1
+
+# Build rule for target.
+Templete_3-1: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Templete_3-1
+.PHONY : Templete_3-1
+
+# fast build rule for target.
+Templete_3-1/fast:
+	$(MAKE) -f src/3-1/CMakeFiles/Templete_3-1.dir/build.make src/3-1/CMakeFiles/Templete_3-1.dir/build
+.PHONY : Templete_3-1/fast
+
+#=============================================================================
+# Target rules for targets named Templete_3-3
+
+# Build rule for target.
+Templete_3-3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Templete_3-3
+.PHONY : Templete_3-3
+
+# fast build rule for target.
+Templete_3-3/fast:
+	$(MAKE) -f src/3-3/CMakeFiles/Templete_3-3.dir/build.make src/3-3/CMakeFiles/Templete_3-3.dir/build
+.PHONY : Templete_3-3/fast
+
+#=============================================================================
+# Target rules for targets named Templete_3-4
+
+# Build rule for target.
+Templete_3-4: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Templete_3-4
+.PHONY : Templete_3-4
+
+# fast build rule for target.
+Templete_3-4/fast:
+	$(MAKE) -f src/3-4/CMakeFiles/Templete_3-4.dir/build.make src/3-4/CMakeFiles/Templete_3-4.dir/build
+.PHONY : Templete_3-4/fast
+
+#=============================================================================
+# Target rules for targets named Templete_3-5
+
+# Build rule for target.
+Templete_3-5: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Templete_3-5
+.PHONY : Templete_3-5
+
+# fast build rule for target.
+Templete_3-5/fast:
+	$(MAKE) -f src/3-5/CMakeFiles/Templete_3-5.dir/build.make src/3-5/CMakeFiles/Templete_3-5.dir/build
+.PHONY : Templete_3-5/fast
+
+#=============================================================================
+# Target rules for targets named Templete_3-6
+
+# Build rule for target.
+Templete_3-6: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Templete_3-6
+.PHONY : Templete_3-6
+
+# fast build rule for target.
+Templete_3-6/fast:
+	$(MAKE) -f src/3-6/CMakeFiles/Templete_3-6.dir/build.make src/3-6/CMakeFiles/Templete_3-6.dir/build
+.PHONY : Templete_3-6/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -202,6 +267,11 @@ help:
 	@echo "... Templete_2-7"
 	@echo "... Templete_2-8"
 	@echo "... Templete_2-9"
+	@echo "... Templete_3-1"
+	@echo "... Templete_3-3"
+	@echo "... Templete_3-4"
+	@echo "... Templete_3-5"
+	@echo "... Templete_3-6"
 .PHONY : help
 
 

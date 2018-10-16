@@ -1,1 +1,0 @@
-/usr/bin/c++     -static -Wl,--gc-sections CMakeFiles/Templete_2-2.dir/main.cpp.o  -o Templete_2-2 

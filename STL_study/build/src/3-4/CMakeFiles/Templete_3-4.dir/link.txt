@@ -1,0 +1,1 @@
+/usr/bin/c++     -static -Wl,--gc-sections -Wreturn-local-addr CMakeFiles/Templete_3-4.dir/main.cpp.o  -o Templete_3-4 

@@ -8,7 +8,7 @@
             "label": "CMake",
             "type": "shell",
             "options": {
-                "cwd": "${workspaceRoot}/build"
+                "cwd": "${worklsspaceRoot}/build"
             },
             "command": "Cmake",
             "args": ["-G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Debug .."] 
@@ -20,7 +20,7 @@
                 "cwd": "${workspaceRoot}/build"
             },
             "command": "make",
-            "args": ["-j 8"],
+            "args": ["-j8"],
             "group": {
                 "kind": "build",
                 "isDefault": true

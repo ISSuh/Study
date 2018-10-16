@@ -17,6 +17,11 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../src/2-7/CMakeLists.txt"
   "../src/2-8/CMakeLists.txt"
   "../src/2-9/CMakeLists.txt"
+  "../src/3-1/CMakeLists.txt"
+  "../src/3-3/CMakeLists.txt"
+  "../src/3-4/CMakeLists.txt"
+  "../src/3-5/CMakeLists.txt"
+  "../src/3-6/CMakeLists.txt"
   "/usr/share/cmake-3.5/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCommonLanguageInclude.cmake"
@@ -49,6 +54,11 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "src/2-7/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/2-8/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/2-9/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/3-1/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/3-3/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/3-4/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/3-5/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/3-6/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -59,4 +69,9 @@ set(CMAKE_DEPEND_INFO_FILES
   "src/2-7/CMakeFiles/Templete_2-7.dir/DependInfo.cmake"
   "src/2-8/CMakeFiles/Templete_2-8.dir/DependInfo.cmake"
   "src/2-9/CMakeFiles/Templete_2-9.dir/DependInfo.cmake"
+  "src/3-1/CMakeFiles/Templete_3-1.dir/DependInfo.cmake"
+  "src/3-3/CMakeFiles/Templete_3-3.dir/DependInfo.cmake"
+  "src/3-4/CMakeFiles/Templete_3-4.dir/DependInfo.cmake"
+  "src/3-5/CMakeFiles/Templete_3-5.dir/DependInfo.cmake"
+  "src/3-6/CMakeFiles/Templete_3-6.dir/DependInfo.cmake"
   )
