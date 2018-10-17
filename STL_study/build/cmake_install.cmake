@@ -45,6 +45,9 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/issuh/Project/Study/STL_study/build/src/3-4/cmake_install.cmake")
   include("/home/issuh/Project/Study/STL_study/build/src/3-5/cmake_install.cmake")
   include("/home/issuh/Project/Study/STL_study/build/src/3-6/cmake_install.cmake")
+  include("/home/issuh/Project/Study/STL_study/build/src/3-7/cmake_install.cmake")
+  include("/home/issuh/Project/Study/STL_study/build/src/3-8/cmake_install.cmake")
+  include("/home/issuh/Project/Study/STL_study/build/src/3-10/cmake_install.cmake")
 
 endif()
 

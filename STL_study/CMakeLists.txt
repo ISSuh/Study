@@ -22,7 +22,7 @@ SET ( CMAKE_EXE_LINKER_FLAGS_RELEASE "-DRELEASE -DLINKER_FLAGS" )
 
 
 SET (SAMPLES 2-1; 2-3; 2-4; 2-7; 2-8; 2-9;
-             3-1; 3-3; 3-4; 3-5; 3-6)
+             3-1; 3-3; 3-4; 3-5; 3-6; 3-7; 3-8; 3-10;)
 
 foreach(SAMPLE ${SAMPLES})
     add_subdirectory(src/${SAMPLE})

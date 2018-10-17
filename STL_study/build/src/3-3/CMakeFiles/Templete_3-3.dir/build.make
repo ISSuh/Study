@@ -60,15 +60,15 @@ include src/3-3/CMakeFiles/Templete_3-3.dir/flags.make
 src/3-3/CMakeFiles/Templete_3-3.dir/main.cpp.o: src/3-3/CMakeFiles/Templete_3-3.dir/flags.make
 src/3-3/CMakeFiles/Templete_3-3.dir/main.cpp.o: ../src/3-3/main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/issuh/Project/Study/STL_study/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/3-3/CMakeFiles/Templete_3-3.dir/main.cpp.o"
-	cd /home/issuh/Project/Study/STL_study/build/src/3-3 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Templete_3-3.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/3-3/main.cpp
+	cd /home/issuh/Project/Study/STL_study/build/src/3-3 && /usr/bin/g++-5   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Templete_3-3.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/3-3/main.cpp
 
 src/3-3/CMakeFiles/Templete_3-3.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Templete_3-3.dir/main.cpp.i"
-	cd /home/issuh/Project/Study/STL_study/build/src/3-3 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/issuh/Project/Study/STL_study/src/3-3/main.cpp > CMakeFiles/Templete_3-3.dir/main.cpp.i
+	cd /home/issuh/Project/Study/STL_study/build/src/3-3 && /usr/bin/g++-5  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/issuh/Project/Study/STL_study/src/3-3/main.cpp > CMakeFiles/Templete_3-3.dir/main.cpp.i
 
 src/3-3/CMakeFiles/Templete_3-3.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Templete_3-3.dir/main.cpp.s"
-	cd /home/issuh/Project/Study/STL_study/build/src/3-3 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/issuh/Project/Study/STL_study/src/3-3/main.cpp -o CMakeFiles/Templete_3-3.dir/main.cpp.s
+	cd /home/issuh/Project/Study/STL_study/build/src/3-3 && /usr/bin/g++-5  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/issuh/Project/Study/STL_study/src/3-3/main.cpp -o CMakeFiles/Templete_3-3.dir/main.cpp.s
 
 src/3-3/CMakeFiles/Templete_3-3.dir/main.cpp.o.requires:
 

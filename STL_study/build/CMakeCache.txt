@@ -24,8 +24,8 @@ CMAKE_BUILD_TYPE:STRING=
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
-//CXX compiler
-CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
+//No help, variable specified on the command line.
+CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++-5
 
 //Flags used by the compiler during all build types.
 CMAKE_CXX_FLAGS:STRING=
@@ -43,8 +43,8 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 //Flags used by the compiler during release builds with debug info.
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
-//C compiler
-CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
+//No help, variable specified on the command line.
+CMAKE_C_COMPILER:FILEPATH=/usr/bin/gcc-5
 
 //Flags used by the compiler during all build types.
 CMAKE_C_FLAGS:STRING=
@@ -208,6 +208,12 @@ Templete_2-9_BINARY_DIR:STATIC=/home/issuh/Project/Study/STL_study/build/src/2-9
 Templete_2-9_SOURCE_DIR:STATIC=/home/issuh/Project/Study/STL_study/src/2-9
 
 //Value Computed by CMake
+Templete_3-10_BINARY_DIR:STATIC=/home/issuh/Project/Study/STL_study/build/src/3-10
+
+//Value Computed by CMake
+Templete_3-10_SOURCE_DIR:STATIC=/home/issuh/Project/Study/STL_study/src/3-10
+
+//Value Computed by CMake
 Templete_3-1_BINARY_DIR:STATIC=/home/issuh/Project/Study/STL_study/build/src/3-1
 
 //Value Computed by CMake
@@ -236,6 +242,24 @@ Templete_3-6_BINARY_DIR:STATIC=/home/issuh/Project/Study/STL_study/build/src/3-6
 
 //Value Computed by CMake
 Templete_3-6_SOURCE_DIR:STATIC=/home/issuh/Project/Study/STL_study/src/3-6
+
+//Value Computed by CMake
+Templete_3-7_BINARY_DIR:STATIC=/home/issuh/Project/Study/STL_study/build/src/3-7
+
+//Value Computed by CMake
+Templete_3-7_SOURCE_DIR:STATIC=/home/issuh/Project/Study/STL_study/src/3-7
+
+//Value Computed by CMake
+Templete_3-8_BINARY_DIR:STATIC=/home/issuh/Project/Study/STL_study/build/src/3-8
+
+//Value Computed by CMake
+Templete_3-8_SOURCE_DIR:STATIC=/home/issuh/Project/Study/STL_study/src/3-8
+
+//Value Computed by CMake
+Templete_3-9_BINARY_DIR:STATIC=/home/issuh/Project/Study/STL_study/build/src/3-9
+
+//Value Computed by CMake
+Templete_3-9_SOURCE_DIR:STATIC=/home/issuh/Project/Study/STL_study/src/3-9
 
 
 ########################
@@ -328,7 +352,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=12
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=15
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

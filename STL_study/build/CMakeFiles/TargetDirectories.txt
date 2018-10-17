@@ -33,3 +33,12 @@
 /home/issuh/Project/Study/STL_study/build/src/3-6/CMakeFiles/edit_cache.dir
 /home/issuh/Project/Study/STL_study/build/src/3-6/CMakeFiles/rebuild_cache.dir
 /home/issuh/Project/Study/STL_study/build/src/3-6/CMakeFiles/Templete_3-6.dir
+/home/issuh/Project/Study/STL_study/build/src/3-7/CMakeFiles/edit_cache.dir
+/home/issuh/Project/Study/STL_study/build/src/3-7/CMakeFiles/rebuild_cache.dir
+/home/issuh/Project/Study/STL_study/build/src/3-7/CMakeFiles/Templete_3-7.dir
+/home/issuh/Project/Study/STL_study/build/src/3-8/CMakeFiles/rebuild_cache.dir
+/home/issuh/Project/Study/STL_study/build/src/3-8/CMakeFiles/edit_cache.dir
+/home/issuh/Project/Study/STL_study/build/src/3-8/CMakeFiles/Templete_3-8.dir
+/home/issuh/Project/Study/STL_study/build/src/3-10/CMakeFiles/edit_cache.dir
+/home/issuh/Project/Study/STL_study/build/src/3-10/CMakeFiles/rebuild_cache.dir
+/home/issuh/Project/Study/STL_study/build/src/3-10/CMakeFiles/Templete_3-10.dir

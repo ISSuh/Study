@@ -253,6 +253,45 @@ Templete_3-6/fast:
 	$(MAKE) -f src/3-6/CMakeFiles/Templete_3-6.dir/build.make src/3-6/CMakeFiles/Templete_3-6.dir/build
 .PHONY : Templete_3-6/fast
 
+#=============================================================================
+# Target rules for targets named Templete_3-7
+
+# Build rule for target.
+Templete_3-7: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Templete_3-7
+.PHONY : Templete_3-7
+
+# fast build rule for target.
+Templete_3-7/fast:
+	$(MAKE) -f src/3-7/CMakeFiles/Templete_3-7.dir/build.make src/3-7/CMakeFiles/Templete_3-7.dir/build
+.PHONY : Templete_3-7/fast
+
+#=============================================================================
+# Target rules for targets named Templete_3-8
+
+# Build rule for target.
+Templete_3-8: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Templete_3-8
+.PHONY : Templete_3-8
+
+# fast build rule for target.
+Templete_3-8/fast:
+	$(MAKE) -f src/3-8/CMakeFiles/Templete_3-8.dir/build.make src/3-8/CMakeFiles/Templete_3-8.dir/build
+.PHONY : Templete_3-8/fast
+
+#=============================================================================
+# Target rules for targets named Templete_3-10
+
+# Build rule for target.
+Templete_3-10: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Templete_3-10
+.PHONY : Templete_3-10
+
+# fast build rule for target.
+Templete_3-10/fast:
+	$(MAKE) -f src/3-10/CMakeFiles/Templete_3-10.dir/build.make src/3-10/CMakeFiles/Templete_3-10.dir/build
+.PHONY : Templete_3-10/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -272,6 +311,9 @@ help:
 	@echo "... Templete_3-4"
 	@echo "... Templete_3-5"
 	@echo "... Templete_3-6"
+	@echo "... Templete_3-7"
+	@echo "... Templete_3-8"
+	@echo "... Templete_3-10"
 .PHONY : help
 
 
