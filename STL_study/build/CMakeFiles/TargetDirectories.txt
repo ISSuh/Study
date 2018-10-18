@@ -42,3 +42,6 @@
 /home/issuh/Project/Study/STL_study/build/src/3-10/CMakeFiles/edit_cache.dir
 /home/issuh/Project/Study/STL_study/build/src/3-10/CMakeFiles/rebuild_cache.dir
 /home/issuh/Project/Study/STL_study/build/src/3-10/CMakeFiles/Templete_3-10.dir
+/home/issuh/Project/Study/STL_study/build/src/4-1/CMakeFiles/edit_cache.dir
+/home/issuh/Project/Study/STL_study/build/src/4-1/CMakeFiles/rebuild_cache.dir
+/home/issuh/Project/Study/STL_study/build/src/4-1/CMakeFiles/Templete_4-1.dir

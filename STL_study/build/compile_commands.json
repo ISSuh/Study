@@ -1,0 +1,77 @@
+[
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/2-1",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_2-1.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/2-1/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/2-1/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/2-3",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_2-3.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/2-3/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/2-3/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/2-4",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_2-4.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/2-4/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/2-4/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/2-7",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_2-7.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/2-7/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/2-7/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/2-8",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_2-8.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/2-8/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/2-8/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/2-9",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_2-9.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/2-9/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/2-9/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/3-1",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_3-1.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/3-1/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/3-1/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/3-3",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_3-3.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/3-3/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/3-3/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/3-4",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_3-4.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/3-4/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/3-4/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/3-5",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_3-5.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/3-5/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/3-5/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/3-6",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_3-6.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/3-6/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/3-6/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/3-7",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_3-7.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/3-7/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/3-7/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/3-8",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_3-8.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/3-8/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/3-8/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/3-10",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_3-10.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/3-10/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/3-10/main.cpp"
+},
+{
+  "directory": "/home/issuh/Project/Study/STL_study/build/src/4-1",
+  "command": "/usr/bin/g++-5     -g   -g -Wall -std=gnu++11 -o CMakeFiles/Templete_4-1.dir/main.cpp.o -c /home/issuh/Project/Study/STL_study/src/4-1/main.cpp",
+  "file": "/home/issuh/Project/Study/STL_study/src/4-1/main.cpp"
+}
+]

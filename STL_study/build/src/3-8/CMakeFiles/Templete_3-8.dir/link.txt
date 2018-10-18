@@ -1,1 +1,1 @@
-/usr/bin/g++-5     -static -Wl,--gc-sections -Wreturn-local-addr CMakeFiles/Templete_3-8.dir/main.cpp.o  -o Templete_3-8 
+/usr/bin/g++-5   -g  -static -Wl,--gc-section2s -Wreturn-local-addr -DDEBUG -DLINKER_FLAGS CMakeFiles/Templete_3-8.dir/main.cpp.o  -o Templete_3-8 
