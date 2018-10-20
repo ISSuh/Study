@@ -1,6 +1,7 @@
 #include <iostream>
-#include "mqtt.h"
+#include "mqtt.hpp"
 
 int main(){
     mqttWrapper<int> TEST("test", "localhost", 33669);
+    TEST.disconnect();
 }

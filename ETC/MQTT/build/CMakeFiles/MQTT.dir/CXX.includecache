@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/issuh/Project/Study/ETC/MQTT/src/main.cpp
+iostream
+-
+mqtt.hpp
+/home/issuh/Project/Study/ETC/MQTT/src/mqtt.hpp
+
+/home/issuh/Project/Study/ETC/MQTT/src/mqtt.hpp
+iostream
+-
+mosquittopp.h
+-
+
+/usr/local/include/mosquitto.h
+stdbool.h
+-
+stddef.h
+-
+
+/usr/local/include/mosquittopp.h
+cstdlib
+-
+mosquitto.h
+-
+time.h
+-
+

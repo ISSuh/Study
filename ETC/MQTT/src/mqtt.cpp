@@ -17,11 +17,7 @@ mqttWrapper<T>::mqttWrapper(const char *id, const char *ip, int port, int keepAl
 
 template <typename T> 
 mqttWrapper<T>::~mqttWrapper(){
-    if(loop)
-        loop_stop();
-
-    disconnect();
-    mosqpp::lib_cleanup();
+    
 }
 
 template <typename T> 
@@ -31,7 +27,7 @@ void mqttWrapper<T>::on_connect(int rc){
 
 template <typename T> 
 void mqttWrapper<T>::on_disconnect(int rc){
-    std::cout << "Disconnect with cod : " << rc << std::endl;
+    std::cout << "Disconnect with code : " << rc << std::endl;
 }
 
 template <typename T> 

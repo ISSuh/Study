@@ -1,0 +1,89 @@
+Compilation of the C compiler identification source "CMakeCCompilerId.c" did not produce an executable in "/home/issuh/Project/Study/ETC/MQTT/build/CMakeFiles/3.5.1/CompilerIdC".
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/gcc-5 
+Build flags: 
+Id flags: 
+
+The output was:
+1
+/usr/bin/ld: cannot open output file a.out: 그런 파일이나 디렉터리가 없습니다
+collect2: error: ld returned 1 exit status
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/g++-5 
+Build flags: 
+Id flags: 
+
+The output was:
+1
+/usr/bin/ld: cannot open output file a.out: 그런 파일이나 디렉터리가 없습니다
+collect2: error: ld returned 1 exit status
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/g++-5 
+Build flags: 
+Id flags: 
+
+The output was:
+1
+/usr/bin/ld: cannot open output file a.out: 그런 파일이나 디렉터리가 없습니다
+collect2: error: ld returned 1 exit status
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/g++-5 
+Build flags: 
+Id flags: -c
+
+The output was:
+1
+g++-5: error: CMakeCXXCompilerId.cpp: 그런 파일이나 디렉터리가 없습니다
+g++-5: fatal error: no input files
+compilation terminated.
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+g++-5: fatal error: no input files
+compilation terminated.
+Determining if the C compiler works failed with the following output:
+Change Dir: /home/issuh/Project/Study/ETC/MQTT/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_54003/fast"
+/usr/bin/make -f CMakeFiles/cmTC_54003.dir/build.make CMakeFiles/cmTC_54003.dir/build
+make[1]: 디렉터리 '/home/issuh/Project/Study/ETC/MQTT/build/CMakeFiles/CMakeTmp' 들어감
+Building C object CMakeFiles/cmTC_54003.dir/testCCompiler.c.o
+/usr/bin/gcc-5     -o CMakeFiles/cmTC_54003.dir/testCCompiler.c.o   -c /home/issuh/Project/Study/ETC/MQTT/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_54003
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_54003.dir/link.txt --verbose=1
+Error opening link script "CMakeFiles/cmTC_54003.dir/link.txt"
+CMakeFiles/cmTC_54003.dir/build.make:97: 'cmTC_54003' 타겟에 대한 명령이 실패했습니다
+make[1]: *** [cmTC_54003] 오류 1
+make[1]: 디렉터리 '/home/issuh/Project/Study/ETC/MQTT/build/CMakeFiles/CMakeTmp' 나감
+Makefile:126: 'cmTC_54003/fast' 타겟에 대한 명령이 실패했습니다
+make: *** [cmTC_54003/fast] 오류 2
+
+
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: /home/issuh/Project/Study/ETC/MQTT/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_7fedd/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7fedd.dir/build.make CMakeFiles/cmTC_7fedd.dir/build
+make[1]: 디렉터리 '/home/issuh/Project/Study/ETC/MQTT/build/CMakeFiles/CMakeTmp' 들어감
+make[1]: CMakeFiles/cmTC_7fedd.dir/build.make: 그런 파일이나 디렉터리가 없습니다
+make[1]: *** 타겟 'CMakeFiles/cmTC_7fedd.dir/build.make'을(를) 만들 규칙이 없습니다.  멈춤.
+make[1]: 디렉터리 '/home/issuh/Project/Study/ETC/MQTT/build/CMakeFiles/CMakeTmp' 나감
+Makefile:126: 'cmTC_7fedd/fast' 타겟에 대한 명령이 실패했습니다
+make: *** [cmTC_7fedd/fast] 오류 2
+
+
+
+Detecting C [-std=c11] compiler features failed to compile with the following output:
+
+
+
+Determining if the CXX compiler works failed with the following output:
+
+

@@ -1,0 +1,1 @@
+/usr/bin/g++-5     -static -Wl,--gc-sections -Wreturn-local-addr -DDEBUG -DLINKER_FLAGS CMakeFiles/MQTT_Sub.dir/src/main.cpp.o  -o MQTT_Sub -lmosquitto 
