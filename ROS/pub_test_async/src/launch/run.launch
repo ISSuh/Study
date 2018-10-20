@@ -1,6 +1,0 @@
-<launch>
-  <node name="mdps_pub" pkg="num_pub" type="node" output="screen" >
-  </node>
-  <node name="cluster_pub" pkg="str_pub" type="node" output="screen">
-  </node>
-</launch>
