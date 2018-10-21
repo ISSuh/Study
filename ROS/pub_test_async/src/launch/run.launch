@@ -1,0 +1,6 @@
+<launch>
+  <node name="mdps_pub" pkg="mdps" type="node" output="screen" />
+  <node name="cluster_pub" pkg="cluster" type="node" output="screen" />
+  <node name="accel_pub" pkg="accel" type="node" output="screen" />
+  <node name="whlspd_pub" pkg="whlspd" type="node" output="screen" />
+</launch>
