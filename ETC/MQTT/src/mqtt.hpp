@@ -5,39 +5,14 @@ template <typename DataType>
 class mqttWrapper : public mosqpp::mosquittopp{
   public:
     mqttWrapper(const char *id, const char *ip, int port, int keepAlive = 60,
-                bool nonBlock = false, bool autoLoop = false) : mosquittopp(id), loop(autoLoop){
-        if (nonBlock)
-            connect_async(ip, port, keepAlive);
-        else
-            connect(ip, port, keepAlive);
-
-        if (loop)
-            loop_start();
-        }
-
+                bool nonBlock = false, bool autoLoop = false);
     ~mqttWrapper();
 
-    bool Publish(const char* Topic, DataType &data, int mid){
-        int ret = publish(mid, Topic, sizeof(DataType), data ,QOS, false);
-        return ( ret == MOSQ_ERR_SUCCESS );
-        }
-
-    bool Subscribe(const char* Topic, int mid){
-        int ret = subscribe(mid, Topic, QOS);
-        return ( ret == MOSQ_ERR_SUCCESS );
-        }  
-    
+    bool Pub(const char* Topic, DataType &data, int mid);
+    bool Sub(const char* Topic, int mid);
     int get_messageLength(const char* Topic);
-
     void Set_QOS(int qos){QOS = qos;}
-
-    void disconnect(){
-        if(loop)
-            loop_stop();
-
-        disconnect();
-        mosqpp::lib_cleanup();
-        }
+    void disconnect();
 
   private:
     void on_connect(int rc){
@@ -63,7 +38,59 @@ class mqttWrapper : public mosqpp::mosquittopp{
 
     bool loop = false;
     int messageLength;
-    DataType *MSG = nullptr;
+    // DataType *MSG = nullptr;
     int messageID;
     int QOS = 0;
 };
+
+
+template <typename DataType> 
+mqttWrapper<DataType>::mqttWrapper(const char *id, const char *ip, int port, int keepAlive, 
+                            bool nonBlock, bool autoLoop) : mosquittopp(id){
+    mosqpp::lib_init();
+
+    if(nonBlock)
+        connect_async(ip, port, keepAlive);
+    else
+        connect(ip, port, keepAlive);
+
+    if(loop)
+        loop_start(); 
+}
+
+template <typename DataType> 
+mqttWrapper<DataType>::~mqttWrapper(){ 
+}
+
+
+template <typename DataType> 
+void mqttWrapper<DataType>::on_message(const struct moquitto_message *message){
+    std::cout << "Receive Message!\n";
+    // MSG = message->payload;
+}
+
+template <typename DataType> 
+int mqttWrapper<DataType>::get_messageLength(const char *Topic){
+    return 1;
+}
+
+template <typename DataType> 
+bool mqttWrapper<DataType>::Pub(const char* Topic, DataType &data, int mid){
+    int ret = publish(mid, Topic, sizeof(DataType), data ,QOS, false);
+    return ( ret == MOSQ_ERR_SUCCESS );
+}
+
+template <typename DataType> 
+bool mqttWrapper<DataType>::Sub(const char* Topic, int mid){
+    int ret = subscribe(mid, Topic, QOS);
+    return ( ret == MOSQ_ERR_SUCCESS );
+}
+
+template <typename DataType> 
+void mqttWrapper<DataType>::disconnect(){
+        if(loop)
+            loop_stop();
+
+        disconnect();
+        mosqpp::lib_cleanup();
+}

@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/issuh/Project/Study/ETC/MQTT/build",
-  "command": "/usr/bin/g++-5    -I/usr/local/include    -static -g -Wall -std=gnu++11 -o CMakeFiles/MQTT.dir/src/main.cpp.o -c /home/issuh/Project/Study/ETC/MQTT/src/main.cpp",
+  "command": "/usr/bin/g++-5    -I/usr/local/include    -o CMakeFiles/MQTT.dir/src/main.cpp.o -c /home/issuh/Project/Study/ETC/MQTT/src/main.cpp",
   "file": "/home/issuh/Project/Study/ETC/MQTT/src/main.cpp"
 }
 ]
