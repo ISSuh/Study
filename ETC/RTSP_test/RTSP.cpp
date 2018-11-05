@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
   Groupsock rtpGroupsock(*env, destinationAddress, rtpPort, ttl);
   rtpGroupsock.multicastSendOnly(); // we're a SSM source
   Groupsock rtcpGroupsock(*env, destinationAddress, rtcpPort, ttl);
-  rtcpGroupsock.multicastSendOnly(); // we're a SSM source
+  rtcpGroupsock.multicastSendOnly(); // we're a SSM sou rce
 
   // Create a 'H264 Video RTP' sink from the RTP 'groupsock':
   OutPacketBuffer::maxSize = 100000;
@@ -128,7 +128,8 @@ void afterPlaying(void* /*clientData*/) {
   // Note that this also closes the input file that this source read from.
 
   // Start playing once again:
-  play();
+  // play();
+  exit(1);
 }
 
 void play() {

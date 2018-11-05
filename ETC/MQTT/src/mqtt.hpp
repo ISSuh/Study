@@ -38,7 +38,7 @@ class mqttWrapper : public mosqpp::mosquittopp{
 
     bool loop = false;
     int messageLength;
-    // DataType *MSG = nullptr;
+    DataType *MSG = nullptr;
     int messageID;
     int QOS = 0;
 };

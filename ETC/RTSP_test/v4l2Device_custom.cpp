@@ -8,142 +8,6 @@
 // project
 #include "logger.h"
 
-/*V4L2Device_Custom::V4L2Device_Custom(UsageEnvironment& env, DeviceInterface * device,
-												int outputFd, unsigned int queueSize)
-: FramedSource(env),
-m_in("in"),
-m_out("out") ,
-m_outfd(outputFd),
-m_device(device),
-m_queueSize(queueSize){
-	m_eventTriggerId = envir().taskScheduler().createEventTrigger(V4L2Device_Custom::deliverFrameStub);
-	if (m_device)
-		envir().taskScheduler().turnOnBackgroundReadHandling( m_device->getFd(),
-															V4L2Device_Custom::incomingPacketHandlerStub, this);
-}
-
-V4L2Device_Custom::~V4L2Device_Custom(){
-	envir().taskScheduler().deleteEventTrigger(m_eventTriggerId);
-	delete m_device;
-}
-
-V4L2Device_Custom *V4L2Device_Custom::V4L2Device_Custom(UsageEnvironment& env, DeviceInterface * device,
-																	int outputFd, unsigned int queueSize){
-	V4L2Device_Custom *sourse;
-	if (device)
-		source = new V4L2DeviceSource(env, device, outputFd, queueSize, useThread);
-
-	return sourse;
-}
-void V4L2Device_Custom::doGetNextFrame(){
-	deliverFrame();
-}
-
-void V4L2Device_Custom::doStopGettingFrames(){
-	LOG(NOTICE) << "V4L2DeviceSource::doStopGettingFrames";
-	FramedSource::doStopGettingFrames();
-}
-
-void V4L2Device_Custom::getNextFrame(){
-
-}
-
-void V4L2DeviceSource::deliverFrame(){
-
-}
-
-void V4L2DeviceSource::incomingPacketHandler()
-{
-	if (this->getNextFrame() <= 0)
-		handleClosure(this);
-
-}*/
-
-
-int DeviceInterface_Custom::stop = 0;
-
-DeviceInterface_Custom *DeviceInterface_Custom::Create(u_int8_t *buffer, u_int64_t *bufferSize,
-							unsigned int width, unsigned int height, const char *deviceName,
-							unsigned int formet, unsigned int fps, int verbose){
-	DeviceInterface_Custom* source ;
-	source = new DeviceInterface_Custom(buffer,bufferSize,width,height,deviceName,formet,fps,verbose);
-	return source;
-}
-
-DeviceInterface_Custom::DeviceInterface_Custom(u_int8_t *buffer, u_int64_t *bufferSize,
-														unsigned int width, unsigned int height,
-														const char *deviceName, unsigned int formet,
-														unsigned int fps, int verbose)
-		:verbose(verbose),
-		 formet(formet),
-		 width(width),
-		 height(height),
-		 fps(fps),
-		 deviceName(deviceName),
-		 buf(buffer){
-	memset(&thid, 0, sizeof(thid));
-//	memset(&mutex, 0, sizeof(mutex));
-
-	initLogger(verbose);
-
-	this->param = new V4L2DeviceParameters(deviceName,formet,width,height,fps,verbose);
-	this->videoCapture = V4l2Capture::create(*param,V4l2Access::IOTYPE_MMAP);
-
-	if(videoCapture == NULL)
-		LOG(WARN) << "Cannot create V4L2 capture interface for device:" << deviceName;
-	else{
-		LOG(WARN) << "Create V4L2 capture" << deviceName;
-		bufSize = videoCapture->getBufferSize();
-		bufferSize = &bufSize;
-
-		signal(SIGINT,sighandler);
-
-		int err = pthread_create(&thid, NULL, threadStub, this);
-		if(err)
-			std::cout << "thread create Error : " << err;
-	}
-}
-
-DeviceInterface_Custom::~DeviceInterface_Custom(){
-	pthread_join(thid, NULL);
-	delete videoCapture;
-}
-
-void *DeviceInterface_Custom::thread(void){
-	int ret;
-
-	while(!stop){
-		tv.tv_sec=1;
-		tv.tv_usec=0;
-		ret = videoCapture->isReadable(&tv);
-
-		switch(ret){
-		case 1:
-		{
-			char buf[this->bufSize];
-			int rsize = videoCapture->read(buf,sizeof(buf));
-
-			if (rsize == -1){
-				LOG(NOTICE) << "stop " << strerror(errno);
-				stop = 1;
-			}
-			else
-				LOG(NOTICE) << "play " << strerror(errno);
-			break;
-		}
-		case -1:
-		{
-			LOG(NOTICE) << "stop " << strerror(errno);
-			stop = 1;
-			break;
-		}
-		}
-	}
-	return 0;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 DeviceParameters_Custom::DeviceParameters_Custom(const char *deviceName, unsigned int formet,
 														unsigned int width,unsigned int height,
 														unsigned int fps,unsigned int verbose)
@@ -239,7 +103,7 @@ void DeviceSource_Custom::doGetNextFrame() {
 			switch(ret){
 			case 1:{
 				int rsize = videoCapture->read((char*)buf,bufSize);
-				LOG(NOTICE) << buf << strerror(errno);
+				// LOG(NOTICE) << buf << strerror(errno);
 				if (rsize == -1){
 					LOG(NOTICE) << "stop " << strerror(errno);
 					stop = 1;
@@ -254,7 +118,6 @@ void DeviceSource_Custom::doGetNextFrame() {
 				break;
 			}
 			}
-
 			deliverFrame();
 		}
 	}

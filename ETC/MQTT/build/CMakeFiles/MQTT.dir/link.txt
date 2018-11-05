@@ -1,1 +1,1 @@
-/usr/bin/g++-5      CMakeFiles/MQTT.dir/src/main.cpp.o  -o MQTT /usr/local/lib/libmosquitto.so -Wl,-rpath,/usr/local/lib 
+/usr/bin/g++-5     -Wl,--gc-sections -Wreturn-local-addr -DDEBUG -DLINKER_FLAGS CMakeFiles/MQTT.dir/src/main.cpp.o  -o MQTT /usr/local/lib/libmosquitto.so -Wl,-rpath,/usr/local/lib 
