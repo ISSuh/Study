@@ -1,0 +1,8 @@
+prefix=/home/issuh/Project/Study/ROS/RTP/install
+
+Name: image2rtp
+Description: Description of image2rtp
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/issuh/Project/Study/ROS/RTP/install/lib 
+Requires: 

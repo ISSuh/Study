@@ -1,0 +1,2 @@
+image2rtp
+-DCATKIN_DEVEL_PREFIX=/home/issuh/Project/Study/ROS/RTP/devel -DCMAKE_INSTALL_PREFIX=/home/issuh/Project/Study/ROS/RTP/install -G Unix Makefiles
