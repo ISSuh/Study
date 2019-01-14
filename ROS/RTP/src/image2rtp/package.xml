@@ -52,13 +52,24 @@
   <build_depend>roscpp</build_depend>
   <build_depend>sensor_msgs</build_depend>
   <build_depend>std_msgs</build_depend>
+  <build_depend>x264</build_depend>
+  <build_depend>avcodec</build_depend>
+  <build_depend>avformat</build_depend>
+  <build_depend>avutil</build_depend>
+  <build_depend>swscale</build_depend>
+  
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>sensor_msgs</build_export_depend>
+  
   <build_export_depend>std_msgs</build_export_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>std_msgs</exec_depend>
-
+  <exec_depend>x264</exec_depend>
+  <exec_depend>avcodec</exec_depend>
+  <exec_depend>avformat</exec_depend>
+  <exec_depend>avutil</exec_depend>
+  <exec_depend>swscale</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

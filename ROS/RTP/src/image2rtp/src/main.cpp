@@ -2,7 +2,7 @@
 #include "sensor_msgs/Image.h"
 
 #include "Encode.cpp"
-#include "Stream.cpp"
+
 /**
  * This tutorial demonstrates simple receipt of messages over the ROS system.
  */

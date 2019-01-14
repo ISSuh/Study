@@ -14,6 +14,24 @@
 # EXTERNAL cache entries
 ########################
 
+//Path to a file.
+AVCODEC_INCLUDE_DIR:PATH=/usr/include/x86_64-linux-gnu
+
+//Path to a library.
+AVCODEC_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libavcodec.so
+
+//Path to a file.
+AVFORMAT_INCLUDE_DIR:PATH=/usr/include/x86_64-linux-gnu
+
+//Path to a library.
+AVFORMAT_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libavformat.so
+
+//Path to a file.
+AVUTIL_INCLUDE_DIR:PATH=/usr/include/x86_64-linux-gnu
+
+//Path to a library.
+AVUTIL_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libavutil.so
+
 //Build shared libraries (DLLs).
 BUILD_SHARED_LIBS:BOOL=ON
 
@@ -196,6 +214,12 @@ EMPY_EXECUTABLE:FILEPATH=/usr/bin/empy
 //Empy script
 EMPY_SCRIPT:STRING=/usr/bin/empy
 
+//Path to a library.
+FFMPEG_swscale_LIBRARY:FILEPATH=FFMPEG_swscale_LIBRARY-NOTFOUND
+
+//The directory containing a CMake configuration file for FFmpeg.
+FFmpeg_DIR:PATH=FFmpeg_DIR-NOTFOUND
+
 //The directory containing a CMake configuration file for GMock.
 GMock_DIR:PATH=GMock_DIR-NOTFOUND
 
@@ -223,6 +247,9 @@ LSB_RELEASE_EXECUTABLE:FILEPATH=/usr/bin/lsb_release
 //Path to a program.
 NOSETESTS:FILEPATH=/usr/bin/nosetests-2.7
 
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+
 //Path to a program.
 PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python
 
@@ -241,11 +268,23 @@ RT_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/librt.so
 //Enable debian style python package layout
 SETUPTOOLS_DEB_LAYOUT:BOOL=ON
 
+//The directory containing a CMake configuration file for SWSCALE.
+SWSCALE_DIR:PATH=SWSCALE_DIR-NOTFOUND
+
+//Path to a file.
+SWSCALE_INCLUDE_DIR:PATH=/usr/include/x86_64-linux-gnu
+
+//Path to a library.
+SWSCALE_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libswscale.so
+
 //LSB Distrib tag
 UBUNTU:BOOL=TRUE
 
 //LSB Distrib - codename tag
 UBUNTU_XENIAL:BOOL=TRUE
+
+//Path to a library.
+X264_LIBRARY:FILEPATH=X264_LIBRARY-NOTFOUND
 
 //Path to a file.
 _gmock_INCLUDES:FILEPATH=/usr/include/gmock/gmock.h
@@ -328,6 +367,9 @@ libgroupsock:FILEPATH=/usr/local/lib/libgroupsock.a
 
 //Path to a library.
 libliveMedia:FILEPATH=/usr/local/lib/libliveMedia.a
+
+//Path to a library.
+libswscale:FILEPATH=/usr/lib/x86_64-linux-gnu/libswscale.a
 
 //The directory containing a CMake configuration file for message_runtime.
 message_runtime_DIR:PATH=/opt/ros/kinetic/share/message_runtime/cmake
@@ -524,10 +566,153 @@ GTEST_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 GTEST_MAIN_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GTEST_MAIN_LIBRARY_DEBUG
 GTEST_MAIN_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+PC_AVCODEC_CFLAGS:INTERNAL=-I/usr/include/x86_64-linux-gnu
+PC_AVCODEC_CFLAGS_I:INTERNAL=
+PC_AVCODEC_CFLAGS_OTHER:INTERNAL=
+PC_AVCODEC_FOUND:INTERNAL=1
+PC_AVCODEC_INCLUDEDIR:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_AVCODEC_INCLUDE_DIRS:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_AVCODEC_LDFLAGS:INTERNAL=-lavcodec
+PC_AVCODEC_LDFLAGS_OTHER:INTERNAL=
+PC_AVCODEC_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+PC_AVCODEC_LIBRARIES:INTERNAL=avcodec
+PC_AVCODEC_LIBRARY_DIRS:INTERNAL=
+PC_AVCODEC_LIBS:INTERNAL=
+PC_AVCODEC_LIBS_L:INTERNAL=
+PC_AVCODEC_LIBS_OTHER:INTERNAL=
+PC_AVCODEC_LIBS_PATHS:INTERNAL=
+PC_AVCODEC_PREFIX:INTERNAL=/usr
+PC_AVCODEC_STATIC_CFLAGS:INTERNAL=-I/usr/include/x86_64-linux-gnu
+PC_AVCODEC_STATIC_CFLAGS_I:INTERNAL=
+PC_AVCODEC_STATIC_CFLAGS_OTHER:INTERNAL=
+PC_AVCODEC_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_AVCODEC_STATIC_LDFLAGS:INTERNAL=-lavcodec;-lvpx;-lm;-lvpx;-lm;-lvpx;-lm;-lvpx;-lm;-llzma;-lcrystalhd;-lrsvg-2;-lm;-lgio-2.0;-lgdk_pixbuf-2.0;-lgobject-2.0;-lglib-2.0;-lcairo;-lzvbi;-lm;-lpthread;-lm;-lpng;-lz;-lsnappy;-lstdc++;-lz;-laom;-lm;-lpthread;-lcodec2;-lgsm;-lmp3lame;-lm;-lopenjp2;-lopus;-lm;-lshine;-lspeex;-ltheoraenc;-ltheoradec;-logg;-ltwolame;-lvorbis;-lvorbisenc;-lwavpack;-lwebp;-lx264;-lx265;-lxvidcore;-ldl;-pthread;-lva;-lswresample;-lm;-lsoxr;-lavutil;-pthread;-lva-drm;-lva;-lva-x11;-lva;-lvdpau;-lX11;-lm;-ldrm;-lva
+PC_AVCODEC_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+PC_AVCODEC_STATIC_LIBDIR:INTERNAL=
+PC_AVCODEC_STATIC_LIBRARIES:INTERNAL=avcodec;vpx;m;vpx;m;vpx;m;vpx;m;lzma;crystalhd;rsvg-2;m;gio-2.0;gdk_pixbuf-2.0;gobject-2.0;glib-2.0;cairo;zvbi;m;pthread;m;png;z;snappy;stdc++;z;aom;m;pthread;codec2;gsm;mp3lame;m;openjp2;opus;m;shine;speex;theoraenc;theoradec;ogg;twolame;vorbis;vorbisenc;wavpack;webp;x264;x265;xvidcore;dl;va;swresample;m;soxr;avutil;va-drm;va;va-x11;va;vdpau;X11;m;drm;va
+PC_AVCODEC_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_AVCODEC_STATIC_LIBS:INTERNAL=
+PC_AVCODEC_STATIC_LIBS_L:INTERNAL=
+PC_AVCODEC_STATIC_LIBS_OTHER:INTERNAL=
+PC_AVCODEC_STATIC_LIBS_PATHS:INTERNAL=
+PC_AVCODEC_VERSION:INTERNAL=58.35.100
+PC_AVCODEC_libavcodec_INCLUDEDIR:INTERNAL=
+PC_AVCODEC_libavcodec_LIBDIR:INTERNAL=
+PC_AVCODEC_libavcodec_PREFIX:INTERNAL=
+PC_AVCODEC_libavcodec_VERSION:INTERNAL=
+PC_AVFORMAT_CFLAGS:INTERNAL=-I/usr/include/x86_64-linux-gnu
+PC_AVFORMAT_CFLAGS_I:INTERNAL=
+PC_AVFORMAT_CFLAGS_OTHER:INTERNAL=
+PC_AVFORMAT_FOUND:INTERNAL=1
+PC_AVFORMAT_INCLUDEDIR:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_AVFORMAT_INCLUDE_DIRS:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_AVFORMAT_LDFLAGS:INTERNAL=-lavformat
+PC_AVFORMAT_LDFLAGS_OTHER:INTERNAL=
+PC_AVFORMAT_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+PC_AVFORMAT_LIBRARIES:INTERNAL=avformat
+PC_AVFORMAT_LIBRARY_DIRS:INTERNAL=
+PC_AVFORMAT_LIBS:INTERNAL=
+PC_AVFORMAT_LIBS_L:INTERNAL=
+PC_AVFORMAT_LIBS_OTHER:INTERNAL=
+PC_AVFORMAT_LIBS_PATHS:INTERNAL=
+PC_AVFORMAT_PREFIX:INTERNAL=/usr
+PC_AVFORMAT_STATIC_CFLAGS:INTERNAL=-I/usr/include/x86_64-linux-gnu
+PC_AVFORMAT_STATIC_CFLAGS_I:INTERNAL=
+PC_AVFORMAT_STATIC_CFLAGS_OTHER:INTERNAL=
+PC_AVFORMAT_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_AVFORMAT_STATIC_LDFLAGS:INTERNAL=-lavformat;-lm;-lxml2;-lbz2;-lgme;-lstdc++;-lopenmpt;-lstdc++;-lchromaprint;-lbluray;-lz;-lgnutls;-lssh;-ldl;-lavcodec;-lvpx;-lm;-lvpx;-lm;-lvpx;-lm;-lvpx;-lm;-llzma;-lcrystalhd;-lrsvg-2;-lm;-lgio-2.0;-lgdk_pixbuf-2.0;-lgobject-2.0;-lglib-2.0;-lcairo;-lzvbi;-lm;-lpthread;-lm;-lpng;-lz;-lsnappy;-lstdc++;-lz;-laom;-lm;-lpthread;-lcodec2;-lgsm;-lmp3lame;-lm;-lopenjp2;-lopus;-lm;-lshine;-lspeex;-ltheoraenc;-ltheoradec;-logg;-ltwolame;-lvorbis;-lvorbisenc;-lwavpack;-lwebp;-lx264;-lx265;-lxvidcore;-ldl;-pthread;-lva;-lswresample;-lm;-lsoxr;-lavutil;-pthread;-lva-drm;-lva;-lva-x11;-lva;-lvdpau;-lX11;-lm;-ldrm;-lva
+PC_AVFORMAT_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+PC_AVFORMAT_STATIC_LIBDIR:INTERNAL=
+PC_AVFORMAT_STATIC_LIBRARIES:INTERNAL=avformat;m;xml2;bz2;gme;stdc++;openmpt;stdc++;chromaprint;bluray;z;gnutls;ssh;dl;avcodec;vpx;m;vpx;m;vpx;m;vpx;m;lzma;crystalhd;rsvg-2;m;gio-2.0;gdk_pixbuf-2.0;gobject-2.0;glib-2.0;cairo;zvbi;m;pthread;m;png;z;snappy;stdc++;z;aom;m;pthread;codec2;gsm;mp3lame;m;openjp2;opus;m;shine;speex;theoraenc;theoradec;ogg;twolame;vorbis;vorbisenc;wavpack;webp;x264;x265;xvidcore;dl;va;swresample;m;soxr;avutil;va-drm;va;va-x11;va;vdpau;X11;m;drm;va
+PC_AVFORMAT_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_AVFORMAT_STATIC_LIBS:INTERNAL=
+PC_AVFORMAT_STATIC_LIBS_L:INTERNAL=
+PC_AVFORMAT_STATIC_LIBS_OTHER:INTERNAL=
+PC_AVFORMAT_STATIC_LIBS_PATHS:INTERNAL=
+PC_AVFORMAT_VERSION:INTERNAL=58.20.100
+PC_AVFORMAT_libavformat_INCLUDEDIR:INTERNAL=
+PC_AVFORMAT_libavformat_LIBDIR:INTERNAL=
+PC_AVFORMAT_libavformat_PREFIX:INTERNAL=
+PC_AVFORMAT_libavformat_VERSION:INTERNAL=
+PC_AVUTIL_CFLAGS:INTERNAL=-I/usr/include/x86_64-linux-gnu
+PC_AVUTIL_CFLAGS_I:INTERNAL=
+PC_AVUTIL_CFLAGS_OTHER:INTERNAL=
+PC_AVUTIL_FOUND:INTERNAL=1
+PC_AVUTIL_INCLUDEDIR:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_AVUTIL_INCLUDE_DIRS:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_AVUTIL_LDFLAGS:INTERNAL=-lavutil
+PC_AVUTIL_LDFLAGS_OTHER:INTERNAL=
+PC_AVUTIL_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+PC_AVUTIL_LIBRARIES:INTERNAL=avutil
+PC_AVUTIL_LIBRARY_DIRS:INTERNAL=
+PC_AVUTIL_LIBS:INTERNAL=
+PC_AVUTIL_LIBS_L:INTERNAL=
+PC_AVUTIL_LIBS_OTHER:INTERNAL=
+PC_AVUTIL_LIBS_PATHS:INTERNAL=
+PC_AVUTIL_PREFIX:INTERNAL=/usr
+PC_AVUTIL_STATIC_CFLAGS:INTERNAL=-I/usr/include/x86_64-linux-gnu
+PC_AVUTIL_STATIC_CFLAGS_I:INTERNAL=
+PC_AVUTIL_STATIC_CFLAGS_OTHER:INTERNAL=
+PC_AVUTIL_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_AVUTIL_STATIC_LDFLAGS:INTERNAL=-lavutil;-pthread;-lva-drm;-lva;-lva-x11;-lva;-lvdpau;-lX11;-lm;-ldrm;-lva
+PC_AVUTIL_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+PC_AVUTIL_STATIC_LIBDIR:INTERNAL=
+PC_AVUTIL_STATIC_LIBRARIES:INTERNAL=avutil;va-drm;va;va-x11;va;vdpau;X11;m;drm;va
+PC_AVUTIL_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_AVUTIL_STATIC_LIBS:INTERNAL=
+PC_AVUTIL_STATIC_LIBS_L:INTERNAL=
+PC_AVUTIL_STATIC_LIBS_OTHER:INTERNAL=
+PC_AVUTIL_STATIC_LIBS_PATHS:INTERNAL=
+PC_AVUTIL_VERSION:INTERNAL=56.22.100
+PC_AVUTIL_libavutil_INCLUDEDIR:INTERNAL=
+PC_AVUTIL_libavutil_LIBDIR:INTERNAL=
+PC_AVUTIL_libavutil_PREFIX:INTERNAL=
+PC_AVUTIL_libavutil_VERSION:INTERNAL=
+PC_SWSCALE_CFLAGS:INTERNAL=-I/usr/include/x86_64-linux-gnu
+PC_SWSCALE_CFLAGS_I:INTERNAL=
+PC_SWSCALE_CFLAGS_OTHER:INTERNAL=
+PC_SWSCALE_FOUND:INTERNAL=1
+PC_SWSCALE_INCLUDEDIR:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_SWSCALE_INCLUDE_DIRS:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_SWSCALE_LDFLAGS:INTERNAL=-lswscale
+PC_SWSCALE_LDFLAGS_OTHER:INTERNAL=
+PC_SWSCALE_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+PC_SWSCALE_LIBRARIES:INTERNAL=swscale
+PC_SWSCALE_LIBRARY_DIRS:INTERNAL=
+PC_SWSCALE_LIBS:INTERNAL=
+PC_SWSCALE_LIBS_L:INTERNAL=
+PC_SWSCALE_LIBS_OTHER:INTERNAL=
+PC_SWSCALE_LIBS_PATHS:INTERNAL=
+PC_SWSCALE_PREFIX:INTERNAL=/usr
+PC_SWSCALE_STATIC_CFLAGS:INTERNAL=-I/usr/include/x86_64-linux-gnu
+PC_SWSCALE_STATIC_CFLAGS_I:INTERNAL=
+PC_SWSCALE_STATIC_CFLAGS_OTHER:INTERNAL=
+PC_SWSCALE_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/x86_64-linux-gnu
+PC_SWSCALE_STATIC_LDFLAGS:INTERNAL=-lswscale;-lm;-lavutil;-pthread;-lva-drm;-lva;-lva-x11;-lva;-lvdpau;-lX11;-lm;-ldrm;-lva
+PC_SWSCALE_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+PC_SWSCALE_STATIC_LIBDIR:INTERNAL=
+PC_SWSCALE_STATIC_LIBRARIES:INTERNAL=swscale;m;avutil;va-drm;va;va-x11;va;vdpau;X11;m;drm;va
+PC_SWSCALE_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_SWSCALE_STATIC_LIBS:INTERNAL=
+PC_SWSCALE_STATIC_LIBS_L:INTERNAL=
+PC_SWSCALE_STATIC_LIBS_OTHER:INTERNAL=
+PC_SWSCALE_STATIC_LIBS_PATHS:INTERNAL=
+PC_SWSCALE_VERSION:INTERNAL=5.3.100
+PC_SWSCALE_libswscale_INCLUDEDIR:INTERNAL=
+PC_SWSCALE_libswscale_LIBDIR:INTERNAL=
+PC_SWSCALE_libswscale_PREFIX:INTERNAL=
+PC_SWSCALE_libswscale_VERSION:INTERNAL=
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PYTHON_EXECUTABLE
 PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 //This needs to be in PYTHONPATH when 'setup.py install' is called.
 //  And it needs to match.  But setuptools won't tell us where
 // it will install things.
 PYTHON_INSTALL_DIR:INTERNAL=lib/python2.7/dist-packages
+__pkg_config_checked_PC_AVCODEC:INTERNAL=1
+__pkg_config_checked_PC_AVFORMAT:INTERNAL=1
+__pkg_config_checked_PC_AVUTIL:INTERNAL=1
+__pkg_config_checked_PC_SWSCALE:INTERNAL=1
+prefix_result:INTERNAL=/usr/lib/x86_64-linux-gnu
 

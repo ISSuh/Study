@@ -1,8 +1,18 @@
+#include <string>
+
+#include <ros/console.h>
+
+#include <x264.h>
+#include <libswscale/swscale.h>
+#include <libavcodec/avcodec.h>
+
 #include <liveMedia/liveMedia.hh>
 #include <BasicUsageEnvironment/BasicUsageEnvironment.hh>
 #include <groupsock/GroupsockHelper.hh>
 
-class RTP{
+class RTP
+{
+// RTP Varialble
 public:
   RTP();
   ~RTP();
@@ -12,14 +22,64 @@ private:
   char const *inputFileName = "test.264";
   H264VideoStreamFramer *videoSource;
   RTPSink *videoSink;
+  RTCPInstance *rtcp;
 
+  TaskScheduler *scheduler;
+  struct in_addr destinationAddress;
+
+  Groupsock rtpGroupsock;
+  Groupsock rtcpGroupsock
+
+  Port rtpPort;
+  Port rtcpPort;
+
+  void initial();
   void play(); // forward
   void afterPlaying();
 
-// } 
-// int main(int argc, char **argv){
-  // Begin by setting up our usage environment:
-  // TaskScheduler* scheduler = BasicTaskScheduler::createNew();
+// x264 Varialble
+public:
+    X264Encoder();
+    ~X264Encoder();
+    bool open(std::string filename, bool datapath); /* open for encoding */
+    bool encode(char *pixels);                      /* encode the given data */
+    bool close();                                   /* close the encoder and file, frees all memory */
+  private:
+    bool validateSettings(); /* validates if all params are set correctly, like width,height, etc.. */
+    void setParams();        /* sets the x264 params */
+
+    /* params the user should set */
+    int in_width;
+    int in_height;
+    int out_width;
+    int out_height;
+    int fps; /* e.g. 25, 60, etc.. */
+    AVPixelFormat in_pixel_format;
+    AVPixelFormat out_pixel_format;
+
+    /* x264 */
+    AVPicture pic_raw; /* used for our "raw" input container */
+    x264_picture_t pic_in;
+    x264_picture_t pic_out;
+    x264_param_t params;
+    x264_nal_t *nals;
+    x264_t *encoder;
+    int num_nals;
+
+    /* input / output */
+    int pts;
+    struct SwsContext *sws;
+    FILE *fp;
+}
+
+RTP::RTP(){
+}
+
+RTP::~RTP(){
+}
+
+void RTP::RTP(){
+  // TaskScheduler *scheduler = BasicTaskScheduler::createNew();
   // env = BasicUsageEnvironment::createNew(*scheduler);
 
   // // Create 'groupsocks' for RTP and RTCP:
@@ -30,7 +90,7 @@ private:
   // // test program - not this test program - as a model.
 
   // const unsigned short rtpPortNum = 18888;
-  // const unsigned short rtcpPortNum = rtpPortNum+1;
+  // const unsigned short rtcpPortNum = rtpPortNum + 1;
   // const unsigned char ttl = 255;
 
   // const Port rtpPort(rtpPortNum);
@@ -48,23 +108,20 @@ private:
   // // Create (and start) a 'RTCP instance' for this RTP sink:
   // const unsigned estimatedSessionBandwidth = 500; // in kbps; for RTCP b/w share
   // const unsigned maxCNAMElen = 100;
-  // unsigned char CNAME[maxCNAMElen+1];
-  // gethostname((char*)CNAME, maxCNAMElen);
+  // unsigned char CNAME[maxCNAMElen + 1];
+  // gethostname((char *)CNAME, maxCNAMElen);
   // CNAME[maxCNAMElen] = '\0'; // just in case
-  // RTCPInstance* rtcp
-  // = RTCPInstance::createNew(*env, &rtcpGroupsock,
-	// 		    estimatedSessionBandwidth, CNAME,
-	// 		    videoSink, NULL /* we're a server */,
-	// 		    True /* we're a SSM source */);
+  // RTCPInstance *rtcp = RTCPInstance::createNew(*env, &rtcpGroupsock,
+  //                                              estimatedSessionBandwidth, CNAME,
+  //                                              videoSink, NULL /* we're a server */,
+  //                                              True /* we're a SSM source */);
   // // Note: This starts RTCP running automatically
 
-  // // Start the streaming:
+  // Start the streaming:
   // *env << "Beginning streaming...\n";
   // play();
 
   // env->taskScheduler().doEventLoop(); // does not return
-
-  // return 0; // only to prevent compiler warning
 }
 
 void RTP::afterPlaying(void * /*clientData*/){
@@ -77,17 +134,16 @@ void RTP::afterPlaying(void * /*clientData*/){
   play();
 }
 
-void RTP::play()  {
+void RTP::play(){
   // Open the input file as a 'byte-stream file source':
-  ByteStreamFileSource* fileSource
-    = ByteStreamFileSource::createNew(*env, inputFileName);
-  if (fileSource == NULL) {
+  ByteStreamFileSource *fileSource = ByteStreamFileSource::createNew(*env, inputFileName);
+  if (fileSource == NULL){
     *env << "Unable to open file \"" << inputFileName
          << "\" as a byte-stream file source\n";
     exit(1);
   }
 
-  FramedSource* videoES = fileSource;
+  FramedSource *videoES = fileSource;
 
   // Create a framer for the Video Elementary Stream:
   videoSource = H264VideoStreamFramer::createNew(*env, videoES);

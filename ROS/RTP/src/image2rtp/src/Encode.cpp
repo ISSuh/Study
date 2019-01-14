@@ -11,17 +11,18 @@
 #define X264_ENCODER
 
 #include <string>
+extern "C"{
 #include <x264.h>
 #include <libswscale/swscale.h>
 #include <libavcodec/avcodec.h>
-
+}
 #include <ros/console.h>
 
 class X264Encoder{
   public:
     X264Encoder();
     ~X264Encoder();
-    bool open(std::string filename, bool datapath); /* open for encoding */
+    bool open(); /* open for encoding */
     bool encode(char *pixels);                      /* encode the given data */
     bool close();                                   /* close the encoder and file, frees all memory */
   private:
@@ -49,11 +50,10 @@ class X264Encoder{
     /* input / output */
     int pts;
     struct SwsContext *sws;
-    FILE *fp;
 };
 
 X264Encoder::X264Encoder()
-    : in_width(0), in_height(0), in_pixel_format(AV_PIX_FMT_NONE), out_width(0), out_height(0), out_pixel_format(AV_PIX_FMT_NONE), fps(25), encoder(NULL), num_nals(0), pts(0){
+    : in_width(0), in_height(0), in_pixel_format(AV_PIX_FMT_NONE), out_width(0), out_height(0), out_pixel_format(AV_PIX_FMT_NONE), fps(30), encoder(NULL), num_nals(0), pts(0){
     
     memset((char *)&pic_raw, 0, sizeof(pic_raw));
 }
@@ -64,7 +64,7 @@ X264Encoder::~X264Encoder(){
     
 }
 
-bool X264Encoder::open(std::string filename, bool datapath){
+bool X264Encoder::open(){
 
     if (!validateSettings()){
         return false;
@@ -94,15 +94,15 @@ bool X264Encoder::open(std::string filename, bool datapath){
         return false;
     }
 
-    if (datapath){
-        filename = rx_to_data_path(filename);
-    }
+    // if (datapath){
+    //     filename = rx_to_data_path(filename);
+    // }
 
-    fp = fopen(filename.c_str(), "w+b");
-    if (!fp){
-        ROS_ERROR("Cannot open the h264 destination file");
-        return false;
-    }
+    // fp = fopen(filename.c_str(), "w+b");
+    // if (!fp){
+    //     ROS_ERROR("Cannot open the h264 destination file");
+    //     return false;
+    // }
 
     x264_picture_alloc(&pic_in, X264_CSP_I420, out_width, out_height);
 
@@ -122,11 +122,11 @@ bool X264Encoder::open(std::string filename, bool datapath){
         return false;
     }
 
-    header_size = nals[0].i_payload + nals[1].i_payload + nals[2].i_payload;
-    if (!fwrite(nals[0].p_payload, header_size, 1, fp)){
-        ROS_ERROR("Cannot write headers");
-        return false;
-    }
+    // header_size = nals[0].i_payload + nals[1].i_payload + nals[2].i_payload;
+    // if (!fwrite(nals[0].p_payload, header_size, 1, fp)){
+    //     ROS_ERROR("Cannot write headers");
+    //     return false;
+    // }
 
     pts = 0;
 
@@ -162,11 +162,11 @@ bool X264Encoder::encode(char *pixels){
     int frame_size = x264_encoder_encode(encoder, &nals, &num_nals, &pic_in, &pic_out);
     if (frame_size)
     {
-        if (!fwrite(nals[0].p_payload, frame_size, 1, fp))
-        {
-            ROS_ERROR("Error while trying to write nal");
-            return false;
-        }
+        // if (!fwrite(nals[0].p_payload, frame_size, 1, fp))
+        // {
+        //     ROS_ERROR("Error while trying to write nal");
+        //     return false;
+        // }
     }
     ++pts;
 
@@ -191,10 +191,10 @@ bool X264Encoder::close()
 
     memset((char *)&pic_raw, 0, sizeof(pic_raw));
 
-    if (fp){
-        fclose(fp);
-        fp = NULL;
-    }
+    // if (fp){
+    //     fclose(fp);
+    //     fp = NULL;
+    // }
     return true;
 }
 
@@ -208,18 +208,18 @@ void X264Encoder::setParams(){
     params.i_fps_den = 1;
     
     // Intra refres:
-    param.i_keyint_max = fps;
-    param.b_intra_refresh = 1;
+    params.i_keyint_max = fps;
+    params.b_intra_refresh = 1;
     
     //Rate control:
-    param.rc.i_rc_method = X264_RC_CRF;
-    param.rc.f_rf_constant = 25;
-    param.rc.f_rf_constant_max = 35;
+    params.rc.i_rc_method = X264_RC_CRF;
+    params.rc.f_rf_constant = 25;
+    params.rc.f_rf_constant_max = 35;
     
     //For streaming:
-    param.b_repeat_headers = 1;
-    param.b_annexb = 1;
-    x264_param_apply_profile(&param, "baseline");
+    params.b_repeat_headers = 1;
+    params.b_annexb = 1;
+    x264_param_apply_profile(&params, "baseline");
 }
 
 bool X264Encoder::validateSettings(){

@@ -120,6 +120,58 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+# FFmpeg
+
+find_package(PkgConfig QUIET)
+pkg_check_modules(PC_AVCODEC QUIET libavcodec)
+pkg_check_modules(PC_AVFORMAT QUIET libavformat)
+pkg_check_modules(PC_AVUTIL QUIET libavutil)
+pkg_check_modules(PC_SWSCALE QUIET libswscale)
+
+find_path(AVCODEC_INCLUDE_DIR libavcodec/avcodec.h
+  HINTS ${PC_AVCODEC_INCLUDEDIR} ${PC_AVOCDEC_INCLUDE_DIRS}
+  )
+find_path(AVFORMAT_INCLUDE_DIR libavformat/avformat.h
+  HINTS ${PC_AVFORMAT_INCLUDEDIR} ${PC_AVFORMAT_INCLUDE_DIRS}
+  )
+find_path(AVUTIL_INCLUDE_DIR libavutil/avutil.h
+  HINTS ${PC_AVUTIL_INCLUDEDIR} ${PC_AVUTIL_INCLUDE_DIRS}
+  )
+find_path(SWSCALE_INCLUDE_DIR libswscale/swscale.h
+  HINTS ${PC_SWSCALE_INCLUDEDIR} ${PC_SWSCALE_INCLUDE_DIRS}
+  )
+
+find_library(AVCODEC_LIBRARY
+  NAMES avcodec libavcodec
+  HINTS ${PC_AVOCDEC_LIBDIR} ${PC_AVCODEC_LIBRARY_DIRS}
+  )
+find_library(AVFORMAT_LIBRARY
+  NAMES avformat libavformat
+  HINTS ${PC_AVFORMAT_LIBDIR} ${PC_AVFORMAT_LIBRARY_DIRS}
+  )
+find_library(AVUTIL_LIBRARY
+  NAMES avutil libavutil
+  HINTS ${PC_AVUTIL_LIBDIR} ${PC_AVUTIL_LIBRARY_DIRS}
+  )
+find_library(SWSCALE_LIBRARY
+  NAMES swscale libswscale
+  HINTS ${PC_SWSCALE_LIBDIR} ${PC_SWSCALE_LIBRARY_DIRS}
+  )
+
+include_directories(${AVFORMAT_INCLUDE_DIR})
+include_directories(${AVCODEC_INCLUDE_DIR})
+include_directories(${AVUTIL_INCLUDE_DIR})
+include_directories(${SWSCALE_INCLUDE_DIR})
+
+message(${SWSCALE_INCLUDE_DIR})
+
+set(AV_LIB
+	${AVFORMAT_LIBRARY}
+	${AVCODEC_LIBRARY}
+	${AVUTIL_LIBRARY}
+	${SWSCALE_LIBRARY}
+)
+
 # Live555 
 include_directories(/usr/local/include/liveMedia)
 include_directories(/usr/local/include/BasicUsageEnvironment)
@@ -162,7 +214,6 @@ link_directories(
   ${x264_LIBRARY_DIR}
 )
 
-
 set(SRC
   src/main.cpp
 )
@@ -196,6 +247,7 @@ target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
   x264
   ${LIVE555_LIB}
+  ${AV_LIB}
 )
 
 #############
