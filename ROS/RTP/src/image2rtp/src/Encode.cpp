@@ -20,10 +20,10 @@ extern "C"{
 
 class X264Encoder{
   public:
-    X264Encoder(int _width, int _height, int _fps);
+    X264Encoder();
     ~X264Encoder();
     bool open();                                    /* open for encoding */
-    bool encode(char *pixels);                      /* encode the given data */
+    bool encode(const uint8_t *pixels);                      /* encode the given data */
     bool close();                                   /* close the encoder and file, frees all memory */
   private:
     bool validateSettings(); /* validates if all params are set correctly, like width,height, etc.. */
@@ -48,11 +48,18 @@ class X264Encoder{
     /* input / output */
     int pts;
     struct SwsContext *sws;
+
+    FILE* fp;
+    
 };
 
-X264Encoder::X264Encoder(int _width, int _height, int _fps)
-    : width(_width), height(_height), in_pixel_format(AV_PIX_FMT_NONE), out_pixel_format(AV_PIX_FMT_NONE), fps(_fps), encoder(NULL), num_nals(0), pts(0){
+X264Encoder::X264Encoder()
+    : width(0), height(0), in_pixel_format(AV_PIX_FMT_RGB8), out_pixel_format(AV_PIX_FMT_YUV420P), fps(0), encoder(NULL), num_nals(0), pts(0){
     
+    width = 960;
+    height = 604;
+    fps = 15;
+
     memset((char *)&pic_raw, 0, sizeof(pic_raw));
 }
 
@@ -71,11 +78,6 @@ bool X264Encoder::open(){
     // @todo add validate which checks if all params are set (in/out width/height, fps,etc..);
     if (encoder){
         ROS_ERROR("Already opened. first call close()");
-        return false;
-    }
-
-    if (out_pixel_format != AV_PIX_FMT_YUV420P){
-        ROS_ERROR("At this moment the output format must be AV_PIX_FMT_YUV420P");
         return false;
     }
 
@@ -99,20 +101,45 @@ bool X264Encoder::open(){
         return false;
     }
 
-
     pts = 0;
+
+    
+    int r = 0;
+    int nheader = 0;
+    int header_size = 0;
+
+    std::string filename = "./test.h264";
+    
+    fp = fopen(filename.c_str(), "w+b");
+    if (!fp){
+        ROS_ERROR("Cannot open the h264 destination file");
+        return  false;
+    }
+
+      // write headers
+    r = x264_encoder_headers(encoder, &nals, &nheader);
+    if (r < 0){
+        ROS_ERROR("x264_encoder_headers() failed");
+        return false;
+    }
+
+    header_size = nals[0].i_payload + nals[1].i_payload + nals[2].i_payload;
+    if (!fwrite(nals[0].p_payload, header_size, 1, fp)){
+        ROS_ERROR("Cannot write headers");
+        return false;
+    }
 
     return true;   
 }
 
-bool X264Encoder::encode(char *pixels){
+bool X264Encoder::encode(const uint8_t *pixels){
     if (!sws){
         ROS_ERROR("Not initialized, so cannot encode");
         return false;
     }
 
     // copy the pixels into our "raw input" container.
-    int bytes_filled = avpicture_fill(&pic_raw, (uint8_t *)pixels, in_pixel_format, width, height);
+    int bytes_filled = avpicture_fill(&pic_raw, pixels, in_pixel_format, width, height);
     if (!bytes_filled){
         ROS_ERROR("Cannot fill the raw input buffer");
         return false;
@@ -131,11 +158,13 @@ bool X264Encoder::encode(char *pixels){
     pic_in.i_pts = pts;
 
     int frame_size = x264_encoder_encode(encoder, &nals, &num_nals, &pic_in, &pic_out);
-    if (!frame_size){
-        ROS_ERROR("Encode failed: %d", h);
-        return false;
+    if (frame_size){
+        if(!fwrite(nals[0].p_payload, frame_size, 1, fp)) {
+            ROS_ERROR("Encode failed: %d", h);
+            return false;
+        }
     }
-
+    
     pts++;
 
     return true;
@@ -158,7 +187,12 @@ bool X264Encoder::close()
     }
 
     memset((char *)&pic_raw, 0, sizeof(pic_raw));
-    
+
+    if (fp){
+        fclose(fp);
+        fp = NULL;
+    }
+
     return true;
 }
 
@@ -186,7 +220,7 @@ void X264Encoder::setParams(){
     x264_param_apply_profile(&params, "baseline");
 
     pic_in.i_type = X264_TYPE_AUTO;
-    pic_in.img.i_csp = X264_CSP_I420
+    pic_in.img.i_csp = X264_CSP_I420;
 }
 
 bool X264Encoder::validateSettings(){
