@@ -19,10 +19,11 @@ int main(int argc, char **argv){
 
   ros::Subscriber sub = n.subscribe("/image_raw", 1000, imageCallback);
 
-  enc.open();
+  enc.open(960, 604, 30, AV_PIX_FMT_RGB24, AV_PIX_FMT_YUV420P);
 
 
   ros::spin();
 
+  enc.close();
   return 0;
 }

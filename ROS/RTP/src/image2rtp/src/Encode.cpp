@@ -11,28 +11,30 @@
 #define X264_ENCODER
 
 #include <string>
+
 extern "C"{
 #include <x264.h>
 #include <libswscale/swscale.h>
 #include <libavcodec/avcodec.h>
 }
+
 #include <ros/console.h>
 
 class X264Encoder{
   public:
     X264Encoder();
     ~X264Encoder();
-    bool open();                                    /* open for encoding */
-    bool encode(const uint8_t *pixels);                      /* encode the given data */
-    bool close();                                   /* close the encoder and file, frees all memory */
+    bool open(int width_, int height_, int fps_, AVPixelFormat in, AVPixelFormat out); /* open for encoding */
+    bool encode(const uint8_t *pixels);                                         /* encode the given data */
+    bool close();                                   
   private:
-    bool validateSettings(); /* validates if all params are set correctly, like width,height, etc.. */
-    void setParams();        /* sets the x264 params */
+    bool validateSettings(); 
+    void setParams();                                                           /* sets the x264 params */
 
     /* params the user should set */
     int width;
     int height;
-    int fps; /* e.g. 25, 60, etc.. */
+    int fps;
     AVPixelFormat in_pixel_format;
     AVPixelFormat out_pixel_format;
 
@@ -45,7 +47,6 @@ class X264Encoder{
     x264_t *encoder;
     int num_nals;
 
-    /* input / output */
     int pts;
     struct SwsContext *sws;
 
@@ -54,22 +55,55 @@ class X264Encoder{
 };
 
 X264Encoder::X264Encoder()
-    : width(0), height(0), in_pixel_format(AV_PIX_FMT_RGB8), out_pixel_format(AV_PIX_FMT_YUV420P), fps(0), encoder(NULL), num_nals(0), pts(0){
+    : width(0), height(0), fps(0), in_pixel_format(AV_PIX_FMT_NONE), out_pixel_format(AV_PIX_FMT_NONE), encoder(NULL), num_nals(0), pts(0){
     
-    width = 960;
-    height = 604;
-    fps = 15;
-
     memset((char *)&pic_raw, 0, sizeof(pic_raw));
 }
 
 X264Encoder::~X264Encoder(){
     if (sws)
         close();
-    
 }
 
-bool X264Encoder::open(){
+void X264Encoder::setParams(){
+
+#if !defined(DEBUG)
+    params.i_log_level = X264_LOG_DEBUG;
+#endif 
+
+    x264_param_default_preset(&params, "ultrafast", "zerolatency");
+    params.i_threads = 1;
+    params.i_width = width;
+    params.i_height = height;
+    params.i_fps_num = fps;
+    params.i_fps_den = 1;
+    
+    // Intra refres:
+    params.i_keyint_max = fps;
+    params.b_intra_refresh = 1;
+    
+    //Rate control:
+    params.rc.i_rc_method = X264_RC_CRF;
+    params.rc.f_rf_constant = 25;
+    params.rc.f_rf_constant_max = 35;
+    
+    //For streaming:
+    params.b_repeat_headers = 1;
+    params.b_annexb = 1;
+    x264_param_apply_profile(&params, "baseline");
+
+    pic_in.i_type = X264_TYPE_AUTO;
+    pic_in.img.i_csp = X264_CSP_I420;
+
+}
+
+
+bool X264Encoder::open(int width_, int height_, int fps_, AVPixelFormat in, AVPixelFormat out){
+    width = width_;
+    height = height_;
+    fps = fps_;
+    in_pixel_format = in;
+    out_pixel_format = out;
 
     if (!validateSettings()){
         return false;
@@ -81,8 +115,6 @@ bool X264Encoder::open(){
         return false;
     }
 
-    x264_picture_alloc(&pic_in, X264_CSP_I420, width, height);
-
     setParams();
 
     // create the encoder using our params
@@ -92,7 +124,9 @@ bool X264Encoder::open(){
         return false;
     }
 
-   sws = sws_getContext(width, height, in_pixel_format,
+    x264_picture_alloc(&pic_in, X264_CSP_I420, width, height);
+
+    sws = sws_getContext(width, height, in_pixel_format,
                          width, height, out_pixel_format,
                          SWS_FAST_BILINEAR, NULL, NULL, NULL);
 
@@ -101,9 +135,7 @@ bool X264Encoder::open(){
         return false;
     }
 
-    pts = 0;
-
-    
+    // ROS image to H.264 Video file 
     int r = 0;
     int nheader = 0;
     int header_size = 0;
@@ -139,16 +171,15 @@ bool X264Encoder::encode(const uint8_t *pixels){
     }
 
     // copy the pixels into our "raw input" container.
-    int bytes_filled = avpicture_fill(&pic_raw, pixels, in_pixel_format, width, height);
-    if (!bytes_filled){
+    if (!avpicture_fill(&pic_raw, pixels, in_pixel_format, width, height)){
         ROS_ERROR("Cannot fill the raw input buffer");
         return false;
     }
+    
+    int srcStride = params.i_width * 3;
 
     // convert to I420 for x264
-    int h = sws_scale(sws, pic_raw.data, pic_raw.linesize, 0,
-                      height, pic_in.img.plane, pic_in.img.i_stride);
-
+    int h = sws_scale(sws, pic_raw.data, &srcStride, 0, height, pic_in.img.plane, pic_in.img.i_stride);
     if (h != height){
         ROS_ERROR("scale failed: %d", h);
         return false;
@@ -159,6 +190,7 @@ bool X264Encoder::encode(const uint8_t *pixels){
 
     int frame_size = x264_encoder_encode(encoder, &nals, &num_nals, &pic_in, &pic_out);
     if (frame_size){
+        // Write File
         if(!fwrite(nals[0].p_payload, frame_size, 1, fp)) {
             ROS_ERROR("Encode failed: %d", h);
             return false;
@@ -170,8 +202,7 @@ bool X264Encoder::encode(const uint8_t *pixels){
     return true;
 }
 
-bool X264Encoder::close()
-{
+bool X264Encoder::close(){
     if (encoder){
         x264_picture_clean(&pic_in);
         memset((char *)&pic_in, 0, sizeof(pic_in));
@@ -196,41 +227,19 @@ bool X264Encoder::close()
     return true;
 }
 
-void X264Encoder::setParams(){
-
-    x264_param_default_preset(&params, "ultrafast", "zerolatency");
-    params.i_threads = 1;
-    params.i_width = width;
-    params.i_height = height;
-    params.i_fps_num = fps;
-    params.i_fps_den = 1;
-    
-    // Intra refres:
-    params.i_keyint_max = fps;
-    params.b_intra_refresh = 1;
-    
-    //Rate control:
-    params.rc.i_rc_method = X264_RC_CRF;
-    params.rc.f_rf_constant = 25;
-    params.rc.f_rf_constant_max = 35;
-    
-    //For streaming:
-    params.b_repeat_headers = 1;
-    params.b_annexb = 1;
-    x264_param_apply_profile(&params, "baseline");
-
-    pic_in.i_type = X264_TYPE_AUTO;
-    pic_in.img.i_csp = X264_CSP_I420;
-}
-
 bool X264Encoder::validateSettings(){
     if (!width){
-        ROS_ERROR("No in_width set");
+        ROS_ERROR("No width set");
         return false;
     }
     
     if (!height){
-        ROS_ERROR("No in_height set");
+        ROS_ERROR("No height set");
+        return false;
+    }
+
+    if (!fps){
+        ROS_ERROR("No fps set");
         return false;
     }
 
