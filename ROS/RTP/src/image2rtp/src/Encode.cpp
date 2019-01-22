@@ -20,7 +20,11 @@ extern "C"{
 
 #include <ros/console.h>
 
-class X264Encoder{
+#include <liveMedia/liveMedia.hh>
+#include <BasicUsageEnvironment/BasicUsageEnvironment.hh>
+#include <groupsock/GroupsockHelper.hh>
+
+class X264Encoder : {
   public:
     X264Encoder();
     ~X264Encoder();
@@ -135,31 +139,31 @@ bool X264Encoder::open(int width_, int height_, int fps_, AVPixelFormat in, AVPi
         return false;
     }
 
-    // ROS image to H.264 Video file 
-    int r = 0;
-    int nheader = 0;
-    int header_size = 0;
+    // // ROS image to H.264 Video file 
+    // int r = 0;
+    // int nheader = 0;
+    // int header_size = 0;
 
-    std::string filename = "./test.h264";
+    // std::string filename = "./test.h264";
     
-    fp = fopen(filename.c_str(), "w+b");
-    if (!fp){
-        ROS_ERROR("Cannot open the h264 destination file");
-        return  false;
-    }
+    // fp = fopen(filename.c_str(), "w+b");
+    // if (!fp){
+    //     ROS_ERROR("Cannot open the h264 destination file");
+    //     return  false;
+    // }
 
-      // write headers
-    r = x264_encoder_headers(encoder, &nals, &nheader);
-    if (r < 0){
-        ROS_ERROR("x264_encoder_headers() failed");
-        return false;
-    }
+    //   // write headers
+    // r = x264_encoder_headers(encoder, &nals, &nheader);
+    // if (r < 0){
+    //     ROS_ERROR("x264_encoder_headers() failed");
+    //     return false;
+    // }
 
-    header_size = nals[0].i_payload + nals[1].i_payload + nals[2].i_payload;
-    if (!fwrite(nals[0].p_payload, header_size, 1, fp)){
-        ROS_ERROR("Cannot write headers");
-        return false;
-    }
+    // header_size = nals[0].i_payload + nals[1].i_payload + nals[2].i_payload;
+    // if (!fwrite(nals[0].p_payload, header_size, 1, fp)){
+    //     ROS_ERROR("Cannot write headers");
+    //     return false;
+    // }
 
     return true;   
 }
@@ -189,12 +193,13 @@ bool X264Encoder::encode(const uint8_t *pixels){
     pic_in.i_pts = pts;
 
     int frame_size = x264_encoder_encode(encoder, &nals, &num_nals, &pic_in, &pic_out);
+    ROS_INFO("size : %d / %d",sizeof(nals[0].p_payload),frame_size);
     if (frame_size){
-        // Write File
-        if(!fwrite(nals[0].p_payload, frame_size, 1, fp)) {
-            ROS_ERROR("Encode failed: %d", h);
-            return false;
-        }
+        // // Write File
+        // if(!fwrite(nals[0].p_payload, frame_size, 1, fp)) {
+        //     ROS_ERROR("Encode failed: %d", h);
+        //     return false;
+        // }
     }
     
     pts++;
