@@ -11,6 +11,7 @@
 #define X264_ENCODER
 
 #include <string>
+#include <queue>
 
 extern "C"{
 #include <x264.h>
@@ -24,13 +25,16 @@ extern "C"{
 #include <BasicUsageEnvironment/BasicUsageEnvironment.hh>
 #include <groupsock/GroupsockHelper.hh>
 
-class X264Encoder : {
+class X264Encoder{
   public:
     X264Encoder();
     ~X264Encoder();
     bool open(int width_, int height_, int fps_, AVPixelFormat in, AVPixelFormat out); /* open for encoding */
     bool encode(const uint8_t *pixels);                                         /* encode the given data */
-    bool close();                                   
+    bool isQueueEmpty();
+    x264_nal_t getNalUnit();
+    bool close();     
+
   private:
     bool validateSettings(); 
     void setParams();                                                           /* sets the x264 params */
@@ -54,6 +58,8 @@ class X264Encoder : {
     int pts;
     struct SwsContext *sws;
 
+    /* Output Set */
+    std::queue<x264_nal_t> Out;
     FILE* fp;
     
 };
@@ -200,6 +206,10 @@ bool X264Encoder::encode(const uint8_t *pixels){
         //     ROS_ERROR("Encode failed: %d", h);
         //     return false;
         // }
+
+        for(int i = 0 ; i < num_nals ; i++){
+            Out.push(nals[i]);
+        }
     }
     
     pts++;
@@ -258,6 +268,20 @@ bool X264Encoder::validateSettings(){
         return false;
     }
     return true;
+}
+
+bool X264Encoder::isQueueEmpty(){
+    if(Out.empty())
+        return true;
+    else   
+        return false;
+}
+
+x264_nal_t X264Encoder::getNalUnit(){
+    x264_nal_t nal;
+    nal = Out.front();
+    Out.pop();
+    return nal;
 }
 
 #endif
