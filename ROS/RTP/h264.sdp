@@ -1,0 +1,9 @@
+v=0
+s=0
+c=IN IP4 127.0.0.1
+m=video 18888 RTP/AVP 103
+a=rtpmap:103 H264/90000
+a=fmtp:103 media=video; clock-rate=90000; encoding-name=H264
+a=recvonly
+t=0 0
+

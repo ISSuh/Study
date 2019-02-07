@@ -7,11 +7,16 @@ project(image2rtp)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+SET(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-g -std=c++11 -pthread")
+set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} "-g")
+
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
   std_msgs
 )
+
+FIND_PACKAGE( Boost 1.58 COMPONENTS program_options REQUIRED )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -203,11 +208,12 @@ set(LIVE555_LIB
 	 ${libliveMedia}
 	 ${libBasicUsageEnvironment}
 	 ${libgroupsock}
-     ${libUsageEnvironment}
+  ${libUsageEnvironment}
 )
 
 include_directories(
   ${x264_INCLUDE_DIR}
+  ${Boost_INCLUDE_DIR} 
 )
 
 link_directories(
@@ -248,6 +254,7 @@ target_link_libraries(${PROJECT_NAME}_node
   x264
   ${LIVE555_LIB}
   ${AV_LIB}
+  ${Boost_LIBRARIES}
 )
 
 #############
