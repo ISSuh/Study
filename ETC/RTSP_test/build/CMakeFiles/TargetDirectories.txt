@@ -1,3 +1,0 @@
-/home/issuh/Project/Study/ETC/RTSP_test/build/CMakeFiles/edit_cache.dir
-/home/issuh/Project/Study/ETC/RTSP_test/build/CMakeFiles/rebuild_cache.dir
-/home/issuh/Project/Study/ETC/RTSP_test/build/CMakeFiles/RTSP_TEST.dir
