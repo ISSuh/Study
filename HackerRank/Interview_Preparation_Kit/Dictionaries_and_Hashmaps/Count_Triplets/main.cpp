@@ -1,36 +1,100 @@
-#include <bits/stdc++.h>
+nclude <bits/stdc++.h>
 
 using namespace std;
 
+string ltrim(const string &);
+string rtrim(const string &);
+vector<string> split(const string &);
+
 // Complete the countTriplets function below.
-typedef long long ll;
+long countTriplets(vector<long> arr, long r) {
+    long result = 0;
+    map<long,long> temp1, temp2;
+
+    for(auto i = arr.begin() ; i != arr.end() ; i++){
+        if(temp2.count(*i))
+            result += temp2[*i];
+        
+        if(temp1.count(*i))
+            temp2[*i*r] += temp1[*i];
+        
+        temp1[*i*r] += 1;
+    }
+
+    return result;
+}
 
 int main()
 {
-    cin.tie(NULL);
-    ios_base::sync_with_stdio(false);
+    ofstream fout(getenv("OUTPUT_PATH"));
 
-    long n,r;
-    cin >> n >> r;
+    string nr_temp;
+    getline(cin, nr_temp);
 
-    map<int,long> mp2, mp3;
-	//mp2 to hold count of needed values after this one to complete 
-	//2nd part of triplet
-	//mp3 to hold count of needed values to complete triplet
+    vector<string> nr = split(rtrim(nr_temp));
 
-    int val;
-    long long res = 0;
-    while(n--)
-    {
-        cin >> val;
-        if (mp3.count(val))		//This value completes mp3[val] triplets
-            res += mp3[val];
-        if (mp2.count(val))		//This value is valid as 2° part of mp2[val] triplets
-            mp3[val*r] += mp2[val];
-        mp2[val*r]++;			//"Push-up" this value as possible triplet start
+    int n = stoi(nr[0]);
+
+    long r = stol(nr[1]);
+
+    string arr_temp_temp;
+    getline(cin, arr_temp_temp);
+
+    vector<string> arr_temp = split(rtrim(arr_temp_temp));
+
+    vector<long> arr(n);
+
+    for (int i = 0; i < n; i++) {
+        long arr_item = stol(arr_temp[i]);
+
+        arr[i] = arr_item;
     }
 
-    cout << res << endl;
+    long ans = countTriplets(arr, r);
+
+    fout << ans << "\n";
+
+    fout.close();
 
     return 0;
 }
+
+string ltrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        s.begin(),
+        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
+
+    return s;
+}
+
+string rtrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        s.end()
+    );
+
+    return s;
+}
+
+vector<string> split(const string &str) {
+    vector<string> tokens;
+
+    string::size_type start = 0;
+    string::size_type end = 0;
+
+    while ((end = str.find(" ", start)) != string::npos) {
+        tokens.push_back(str.substr(start, end - start));
+
+        start = end + 1;
+    }
+
+    tokens.push_back(str.substr(start));
+
+    return tokens;
+}
+
