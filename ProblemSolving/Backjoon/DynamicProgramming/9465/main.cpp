@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <bitset>
+#include <algorithm>
 
 int main(){
     int T = 0;
@@ -23,19 +23,13 @@ int main(){
 
         for(auto i=2 ; i<n+1; i++){
             for(auto j=0 ; j<2 ; j++){
-            
-                if(val[!j][i-1] > val[!j][i-2])
-                    val[j][i] = val[!j][i-1] + item[j][i-1]; 
-                else 
-                    val[j][i] = val[!j][i-2] + item[j][i-1];
-
-                if(max < val[j][i])
-                    max = val[j][i];
+                
+                val[j][i] = item[j][i-1] + std::max({val[!j][i-1],val[!j][i-2],val[j][i-2]});
 
             }
         }
 
-        std::cout << max << std::endl;
+        std::cout << std::max(val[0][n],val[1][n]) << std::endl;
     }
 }
 
