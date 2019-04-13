@@ -5,75 +5,92 @@ https://www.acmicpc.net/problem/1991
 */
 
 #include <iostream>
+#include <memory>
 
+template<typename T>
 class Node{
     public : 
-        Node(char data) { 
+        Node(const T data) { 
             this->data = data;
-            this->leftNode = nullptr;
-            this->rightNode = nullptr; 
+            this->leftNode = NULL;
+            this->rightNode = NULL; 
         }
         
-        char data;
-        Node *leftNode, *rightNode;
+        T data;
+        Node<T> *leftNode, *rightNode;
 };
 
+template<typename T>
 class Tree{
 public :
-    Node* add(Node *root, char data, char left, char right) {
-        if(root == nullptr){
-            Node *head = new Node(data);
+    Node<T>* add(Node<T> *root, const T data, const T left, const T right) {
+        if(root == NULL){
+            Node<T> *head = new Node<T>(data);
 
             if(left != '.'){
-                Node *headLeft = new Node(left);
+                Node<T> *headLeft = new Node<T>(left);
                 head->leftNode = headLeft;
             }
             if(right != '.'){
-                Node *headRight = new Node(right);
+                Node<T> *headRight = new Node<T>(right);
                 head->rightNode = headRight;
             }
 
             return head;        
         }
         else{
-            std::cout << "1" << "\n";
+            Node<T> *head = root;
 
-            Node *tmp = search(root, data);
+            search(head, data, left, right);
 
-            std::cout << "2" << "\n";
-
-            if(left != '.'){
-                Node *tmpLeft = new Node(left);
-                tmp->leftNode = tmpLeft;
-            }
-            if(right != '.'){
-                Node *tmpRight = new Node(right);
-                tmp->rightNode = tmpRight;
-            }
-
-            return root;    
+            return root;
         }
     }
 
-    void preOrder(Node *root) {
+    void search(Node<T> *root, T val, T left, T right){
+        
         if(root != NULL){
-            std::cout << root->data << " ";
+            if(root->data == val){
+                if(left != '.'){
+                    Node<T> *tmpLeft = new Node<T>(left);
+                    root->leftNode = tmpLeft;
+                }
+                if(right != '.'){
+                    Node<T> *tmpRight = new Node<T>(right);
+                    root->rightNode = tmpRight;
+                }
+            }
+            else{
+                if(root->leftNode != NULL)
+                    search(root->leftNode, val, left, right);
+
+                if(root->rightNode != NULL)
+                    search(root->rightNode, val, left, right);
+            }
+        }
+    }
+
+    void preOrder(Node<T> *root) {
+        if(root != NULL){
+            std::cout << root->data;
             preOrder(root->leftNode);
             preOrder(root->rightNode);
         }
     }
 
-private :
-    Node *search(Node *root, char val){
-        Node *tmp = root;
+    void inOrder(Node<T> *root) {
+        if(root != NULL){
+            inOrder(root->leftNode);
+            std::cout << root->data;
+            inOrder(root->rightNode);
+        }
+    }
 
-        std::cout << "11" << "\n";
-        std::cout << tmp->data << "\n";
-
-        if(tmp->data == val) return tmp;
-        else{
-            search(tmp->leftNode, val);
-            search(tmp->rightNode, val);
+    void postOrder(Node<T> *root) {
+        if(root != NULL){
+            postOrder(root->leftNode);
+            postOrder(root->rightNode);
+            std::cout << root->data;
         }
     } 
 };
@@ -84,15 +101,21 @@ int main(){
     int N = 0;
     std::cin >> N;
 
-    Node *root = nullptr;
-    Tree tree;
+    Node<char> *root = NULL;
+    Tree<char> tree;
 
     char data, leftNodeData, rightNodeData;
-    while(N--){
+    while(--N){
         std::cin >> data >> leftNodeData >> rightNodeData;
         
         root = tree.add(root, data, leftNodeData, rightNodeData);
     }
-
+    
+    std::cout << "\n";
     tree.preOrder(root);
+    std::cout << "\n";
+    tree.inOrder(root);
+    std::cout << "\n";
+    tree.postOrder(root);
+    std::cout << "\n";
 }
