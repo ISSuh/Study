@@ -67,10 +67,8 @@ private :
     Node *search(Node *root, char val){
         Node *tmp = root;
 
-        std::cout << "11" << "\n";
-        std::cout << tmp->data << "\n";
-
-        if(tmp->data == val) return tmp;
+        if(tmp->data == val) 
+            return tmp;
         else{
             search(tmp->leftNode, val);
             search(tmp->rightNode, val);
