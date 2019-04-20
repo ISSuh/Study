@@ -78,17 +78,6 @@ public :
         }
     }
 
-<<<<<<< HEAD
-private :
-    Node *search(Node *root, char val){
-        Node *tmp = root;
-
-        if(tmp->data == val) 
-            return tmp;
-        else{
-            search(tmp->leftNode, val);
-            search(tmp->rightNode, val);
-=======
     void inOrder(Node<T> *root) {
         if(root != NULL){
             inOrder(root->leftNode);
@@ -102,7 +91,6 @@ private :
             postOrder(root->leftNode);
             postOrder(root->rightNode);
             std::cout << root->data;
->>>>>>> 0b464c52cc912e71e32f79b024869f61f2e7afae
         }
     } 
 };
