@@ -17,7 +17,7 @@ int solution(vector<int> priorities, int location) {
     }
 
     sort(priorities.begin(), priorities.end(), greater<int>());
-
+`
     index = 1;
     while(!q.empty()){  
         if(*it != q.front().second){
