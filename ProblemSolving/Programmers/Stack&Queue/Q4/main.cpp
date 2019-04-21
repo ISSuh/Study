@@ -29,12 +29,12 @@ vector<int> solution(vector<int> progresses, vector<int> speeds) {
                 answer.push_back(progressCount);
 
             sizeCount = 0;
+            progressCount = 0;
         }
         
         q.push(pair<int,int>(q.front().first, q.front().second + speeds[q.front().first]));
         q.pop();
-
-        progressCount = 0;
+    
         sizeCount++;
     }
     
