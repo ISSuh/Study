@@ -1,6 +1,197 @@
 # 프로그래머스 문제풀이
 ## 2019
 
+### [ 뉴스 클러스터링 ](https://programmers.co.kr/learn/courses/30/lessons/17677) - lv.2
+
+- 문제
+
+여러 언론사에서 쏟아지는 뉴스, 특히 속보성 뉴스를 보면 비슷비슷한 제목의 기사가 많아 정작 필요한 기사를 찾기가 어렵다. Daum 뉴스의 개발 업무를 맡게 된 신입사원 튜브는 사용자들이 편리하게 다양한 뉴스를 찾아볼 수 있도록 문제점을 개선하는 업무를 맡게 되었다.
+
+개발의 방향을 잡기 위해 튜브는 우선 최근 화제가 되고 있는 "카카오 신입 개발자 공채" 관련 기사를 검색해보았다.
+
+    카카오 첫 공채..'블라인드' 방식 채용
+    카카오, 합병 후 첫 공채.. 블라인드 전형으로 개발자 채용
+    카카오, 블라인드 전형으로 신입 개발자 공채
+    카카오 공채, 신입 개발자 코딩 능력만 본다
+    카카오, 신입 공채.. "코딩 실력만 본다"
+    카카오 "코딩 능력만으로 2018 신입 개발자 뽑는다"
+
+기사의 제목을 기준으로 "블라인드 전형"에 주목하는 기사와 "코딩 테스트"에 주목하는 기사로 나뉘는 걸 발견했다. 튜브는 이들을 각각 묶어서 보여주면 카카오 공채 관련 기사를 찾아보는 사용자에게 유용할 듯싶었다.
+
+유사한 기사를 묶는 기준을 정하기 위해서 논문과 자료를 조사하던 튜브는 "자카드 유사도"라는 방법을 찾아냈다.
+
+자카드 유사도는 집합 간의 유사도를 검사하는 여러 방법 중의 하나로 알려져 있다. 두 집합 A, B 사이의 자카드 유사도 J(A, B)는 두 집합의 교집합 크기를 두 집합의 합집합 크기로 나눈 값으로 정의된다.
+
+예를 들어 집합 A = {1, 2, 3}, 집합 B = {2, 3, 4}라고 할 때, 교집합 A ∩ B = {2, 3}, 합집합 A ∪ B = {1, 2, 3, 4}이 되므로, 집합 A, B 사이의 자카드 유사도 J(A, B) = 2/4 = 0.5가 된다. 집합 A와 집합 B가 모두 공집합일 경우에는 나눗셈이 정의되지 않으니 따로 J(A, B) = 1로 정의한다.
+
+자카드 유사도는 원소의 중복을 허용하는 다중집합에 대해서 확장할 수 있다. 다중집합 A는 원소 "1"을 3개 가지고 있고, 다중집합 B는 원소 "1"을 5개 가지고 있다고 하자. 이 다중집합의 교집합 A ∩ B는 원소 "1"을 min(3, 5)인 3개, 합집합 A ∪ B는 원소 "1"을 max(3, 5)인 5개 가지게 된다. 다중집합 A = {1, 1, 2, 2, 3}, 다중집합 B = {1, 2, 2, 4, 5}라고 하면, 교집합 A ∩ B = {1, 2, 2}, 합집합 A ∪ B = {1, 1, 2, 2, 3, 4, 5}가 되므로, 자카드 유사도 J(A, B) = 3/7, 약 0.42가 된다.
+
+이를 이용하여 문자열 사이의 유사도를 계산하는데 이용할 수 있다. 문자열 "FRANCE"와 "FRENCH"가 주어졌을 때, 이를 두 글자씩 끊어서 다중집합을 만들 수 있다. 각각 {FR, RA, AN, NC, CE}, {FR, RE, EN, NC, CH}가 되며, 교집합은 {FR, NC}, 합집합은 {FR, RA, AN, NC, CE, RE, EN, CH}가 되므로, 두 문자열 사이의 자카드 유사도 J("FRANCE", "FRENCH") = 2/8 = 0.25가 된다.
+
+- 제한사항
+  - 입력으로는 str1과 str2의 두 문자열이 들어온다. 각 문자열의 길이는 2 이상, 1,000 이하이다.
+  - 입력으로 들어온 문자열은 두 글자씩 끊어서 다중집합의 원소로 만든다. 이때 영문자로 된 글자 쌍만 유효하고, 기타 공백이나 숫자, 특수 문자가 들어있는 경우는 그 글자 쌍을 버린다. 예를 들어 "ab+"가 입력으로 들어오면, "ab"만 다중집합의 원소로 삼고, "b+"는 버린다.
+  - 다중집합 원소 사이를 비교할 때, 대문자와 소문자의 차이는 무시한다. "AB"와 "Ab", "ab"는 같은 원소로 취급한다.
+
+- 입출력 예
+
+| str1 | str2 |	answer
+| -- | --| --|
+| FRANCE | french | 16384 |
+| handshake | shake hands | 65536 |
+| aa1+aa2 | AAAA12 | 43690 |
+| E=M*C^2 | e=m*c^2 | 65536 |
+
+- 풀이
+  - sort, set
+
+```C++
+int solution(string str1, string str2) {
+    int answer = 0;
+    vector<string> s1, s2;
+    vector<string> unionStr, intersectionStr;
+    
+    std::transform(str1.begin(), str1.end(), str1.begin(), ::tolower);
+    std::transform(str2.begin(), str2.end(), str2.begin(), ::tolower);
+    
+    for(auto i = 1 ; i < str1.size() ; ++i){
+        if(('a' <= str1[i-1] && str1[i-1] <= 'z') && ('a' <= str1[i] && str1[i] <= 'z'))
+            s1.push_back(str1.substr(i-1, 2));
+    }
+    
+    for(auto i = 1 ; i < str2.size() ; ++i){
+        if(('a' <= str2[i-1] && str2[i-1] <= 'z') && ('a' <= str2[i] && str2[i] <= 'z'))
+            s2.push_back(str2.substr(i-1, 2));
+    }
+    
+    sort(s1.begin(), s1.end());
+    sort(s2.begin(), s2.end());
+
+    set_union(s1.begin(), s1.end(), s2.begin(), s2.end(), back_inserter(unionStr));    
+    set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(), back_inserter(intersectionStr));
+    
+    if(unionStr.size() < 1)
+        answer = 65536;
+    else
+        answer = (static_cast<float>(intersectionStr.size()) / static_cast<float>(unionStr.size())) * 65536;
+    
+    return answer;
+}
+```
+
+### [ 가장 큰 정사각형 찾기  ](https://programmers.co.kr/learn/courses/30/lessons/12905) - lv.2
+
+- 문제
+
+1와 0로 채워진 표(board)가 있습니다. 표 1칸은 1 x 1 의 정사각형으로 이루어져 있습니다. 표에서 1로 이루어진 가장 큰 정사각형을 찾아 넓이를 return 하는 solution 함수를 완성해 주세요. (단, 정사각형이란 축에 평행한 정사각형을 말합니다.)
+
+예를 들어
+
+| 1 | 2 | 3 | 4 |
+| ----------- | ----------- | ----------- | ----------- |
+| 0 | 1 | 1 | 1 |
+| 1 | 1 | 1 | 1 |
+| 1 | 1 | 1 | 1 |
+| 0 | 0 | 1 | 0 |
+
+가 있다면 가장 큰 정사각형은
+
+| 1 | 2 | 3 | 4 |
+| ----------- | ----------- | ----------- | ----------- |
+| 0 | `1` | `1` | `1` |
+| 1 | `1` | `1` | `1` |
+| 1 | `1` | `1` | `1` |
+| 0 | 0 | 1 | 0 |
+
+가 되며 넓이는 9가 되므로 9를 반환해 주면 됩니다.
+
+- 제한사항
+  - 표(board)는 2차원 배열로 주어집니다.
+  - 표(board)의 행(row)의 크기 : 1,000 이하의 자연수
+  - 표(board)의 열(column)의 크기 : 1,000 이하의 자연수
+  - 표(board)의 값은 1또는 0으로만 이루어져 있습니다.
+
+- 입출력 예
+  
+| board |  result |
+| ----------- | ----------- |
+| [[0,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,1,0]] | 9 |
+| [[0,0,1,1],[1,1,1,1]] | 4 |
+
+`입출력 예 #1
+위의 예시와 같습니다.
+
+입출력 예 #2
+| 0 | 0 | 1 | 1 |
+| 1 | 1 | 1 | 1 |
+로 가장 큰 정사각형의 넓이는 4가 되므로 4를 return합니다.`
+
+- 풀이
+  - DP
+
+```C++
+int solution(vector<vector<int>> board)
+{
+    if(board.size() < 2 || board[0].size() < 2)
+        return 1;
+    
+    int answer = 0;
+
+    for(auto i = 1; i < board.size() ; ++i){        
+        for(auto j = 1; j < board[0].size() ; ++j){
+            if(board[i][j] == 0)
+                continue;
+            
+            board[i][j] = min({board[i-1][j-1], board[i-1][j], board[i][j-1]}) + 1;
+        }
+        
+        int max = *max_element(board[i].begin(), board[i].end());
+        if(answer < max)
+            answer = max;
+    }
+
+    return answer * answer;
+}
+```
+
+### [ H-Index ](https://programmers.co.kr/learn/courses/30/lessons/42747) - lv.2
+
+- 문제
+
+H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다. 위키백과1에 따르면, H-Index는 다음과 같이 구합니다.
+어떤 과학자가 발표한 논문 n편 중, h번 이상 인용된 논문이 h편 이상이고 나머지 논문이 h번 이하 인용되었다면 h가 이 과학자의 H-Index입니다.
+어떤 과학자가 발표한 논문의 인용 횟수를 담은 배열 citations가 매개변수로 주어질 때, 이 과학자의 H-Index를 return 하도록 solution 함수를 작성해주세요.
+
+- 제한사항
+  - 과학자가 발표한 논문의 수는 1편 이상 1,000편 이하입니다.
+  - 논문별 인용 횟수는 0회 이상 10,000회 이하입니다.
+
+- 입출력 예
+  
+| citations |  result |
+| ----------- | ----------- |
+| [3, 0, 6, 1, 5] | 3 |
+
+`이 과학자가 발표한 논문의 수는 5편이고, 그중 3편의 논문은 3회 이상 인용되었습니다. 그리고 나머지 2편의 논문은 3회 이하 인용되었기 때문에 이 과학자의 H-Index는 3입니다.`
+
+- 풀이
+  - sort
+
+```C++
+int solution(vector<int> citations) {
+    int answer = 0;
+    
+    std::sort(citations.begin() , citations.end(), greater<int>());
+
+    for(auto i = 0 ; i < citations.size() ; ++i){
+        if(citations[i] < i+1)
+            return i;
+    }    
+        
+    return citations.size();
+}
+```
+
 ### [스킬트리](https://programmers.co.kr/learn/courses/30/lessons/49993) - lv.2
 
 - 문제
@@ -27,7 +218,7 @@
 | "CBD" | ["BACDE", "CBADF", "AECB", "BDA"] |	2 |
 
 - 풀이
-  - GCD
+  - index
 
 ```C++
 int solution(string skill, vector<string> skill_trees) {
@@ -72,6 +263,10 @@ int solution(string skill, vector<string> skill_trees) {
 | W | H | result |
 | ----------- | ----------- | ----------- |
 | 8 | 12 |	80 |
+
+`가로가 8, 세로가 12인 직사각형을 대각선 방향으로 자르면 총 16개 정사각형을 사용할 수 없게 됩니다. 원래 직사각형에서는 96개의 정사각형을 만들 수 있었으므로, 96 - 16 = 80 을 반환합니다.`
+
+![example](https://grepp-programmers.s3.amazonaws.com/files/production/ee895b2cd9/567420db-20f4-4064-afc3-af54c4a46016.png)
 
 - 풀이
   - GCD
