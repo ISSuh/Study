@@ -390,6 +390,14 @@ long long solution(int w,int h)
 | 3 | [[1, 1, 0], [1, 1, 0], [0, 0, 1]] | 2 |
 | 3 | [[1, 1, 0], [1, 1, 1], [0, 1, 1]] | 1 |
 
+`예제 #1 아래와 같이 2개의 네트워크가 있습니다.`
+
+![example](https://grepp-programmers.s3.amazonaws.com/files/ybm/5b61d6ca97/cc1e7816-b6d7-4649-98e0-e95ea2007fd7.png)
+
+`예제 #2 아래와 같이 1개의 네트워크가 있습니다.`
+
+![example](https://grepp-programmers.s3.amazonaws.com/files/ybm/7554746da2/edb61632-59f4-4799-9154-de9ca98c9e55.png)
+
 - 풀이
   - DFS, BFS
 
