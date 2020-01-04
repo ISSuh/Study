@@ -4,7 +4,7 @@
 
 ----------------------------------
 
-### [ 문자열 합치기 ](https://www.algospot.com/judge/problem/read/STRJOIN#)
+### [ 문자열 합치기 ](https://www.algospot.com/judge/problem/read/STRJOIN#) - 중
 
 - 문제
 
@@ -77,7 +77,7 @@ int solution(int n, std::vector<int>& length){
 
 ----------------------------------
 
-### [ Microwaving Lunch Boxes ](https://www.algospot.com/judge/problem/read/LUNCHBOX)
+### [ Microwaving Lunch Boxes ](https://www.algospot.com/judge/problem/read/LUNCHBOX) - 하
 
 - 문제
 
@@ -151,7 +151,7 @@ int solution(int n, std::vector<int>& heating, std::vector<int>& eating){
 
 ----------------------------------
 
-### [ 출전 순서 정하기 ](https://www.algospot.com/judge/problem/read/MATCHORDER)
+### [ 출전 순서 정하기 ](https://www.algospot.com/judge/problem/read/MATCHORDER) - 하
 
 - 문제
 
