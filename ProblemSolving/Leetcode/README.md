@@ -4,6 +4,50 @@
 
 ----------------------------------
 
+### [ 303. Range Sum Query - Immutable ](https://leetcode.com/problems/range-sum-query-immutable/) - easy
+
+- 문제
+
+Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
+
+- 제한사항
+  - You may assume that the array does not change.
+  - There are many calls to sumRange function.
+
+- 입출력 예
+  
+```
+Example 1:
+Given nums = [-2, 0, 3, -5, 2, -1]
+
+sumRange(0, 2) -> 1
+sumRange(2, 5) -> -1
+sumRange(0, 5) -> -3
+```
+
+- 풀이
+  - sum
+
+```C++
+class NumArray {
+private:
+    const vector<int>& m_nums;
+public:
+    NumArray(vector<int>& nums) : m_nums(nums){}
+    
+    int sumRange(int i, int j) {
+        int sum = 0;
+        
+        for(auto index = i ; index <= j ; ++index){
+            sum += m_nums[index];
+        }
+        
+        return sum;
+    }
+};
+```
+----------------------------------
+
 ### [ 290. Word Pattern ](https://leetcode.com/problems/word-pattern/) - easy
 
 - 문제
