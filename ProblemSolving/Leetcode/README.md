@@ -4,6 +4,83 @@
 
 ----------------------------------
 
+### [ 290. Word Pattern ](https://leetcode.com/problems/word-pattern/) - easy
+
+- 문제
+
+Given a pattern and a string str, find if str follows the same pattern.
+
+Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.
+
+- 제한사항
+  - You may assume pattern contains only lowercase letters, and str contains lowercase letters that may be separated by a single space
+
+
+- 입출력 예
+  
+```
+Example 1:
+Input: pattern = "abba", str = "dog cat cat dog"
+Output: true
+```
+```
+Example 2:
+Input:pattern = "abba", str = "dog cat cat fish"
+Output: false
+```
+```
+Example 3:
+Input: pattern = "aaaa", str = "dog cat cat dog"
+Output: false
+```
+```
+Example 4:
+Input: pattern = "abba", str = "dog dog dog dog"
+Output: false
+```
+
+- 풀이
+  - hash
+
+```C++
+class Solution {
+public:
+    bool wordPattern(string pattern, string str) {
+        vector<string> strVec;
+        string token;
+        stringstream ss(str);
+        
+        while (getline(ss, token, ' ')) {
+		    strVec.push_back(token);
+	    }
+        
+        map<char, string> m;
+        set<string> s;
+        
+        if(pattern.size() != strVec.size())
+            return false;
+        
+        for(auto i = 0 ; i < pattern.size() ; ++i){
+            if(m.find(pattern[i]) != m.end()){
+                if(m[pattern[i]] != strVec[i])
+                    return false;
+            }
+            else{
+                m[pattern[i]] = strVec[i];
+                s.insert(m[pattern[i]]);
+            }
+        }
+        
+        if(s.size() == m.size())
+            return true;
+        else
+            return false;
+    }
+};
+```
+
+----------------------------------
+
 ### [ 283. Move Zeroes ](https://leetcode.com/problems/k-diff-pairs-in-an-array/) - easy
 
 - 문제
@@ -58,27 +135,21 @@ Given an array of integers and an integer k, you need to find the number of uniq
   - All the integers in the given input belong to the range: [-1e7, 1e7].
 
 - 입출력 예
-
-  - Example 1:
-
 ```
+Example 1:
 Input: [3, 1, 4, 1, 5], k = 2
 Output: 2
 Explanation: There are two 2-diff pairs in the array, (1, 3) and (3, 5).
 Although we have two 1s in the input, we should only return the number of unique pairs.
 ```
-
-  - Example 2:
-
 ```
+Example 2:
 Input:[1, 2, 3, 4, 5], k = 1
 Output: 4
 Explanation: There are four 1-diff pairs in the array, (1, 2), (2, 3), (3, 4) and (4, 5).
 ```
-
-  - Example 3:
-
 ```
+Example 3:
 Input: [1, 3, 1, 5, 4], k = 0
 Output: 1
 Explanation: There is one 0-diff pair in the array, (1, 1).
