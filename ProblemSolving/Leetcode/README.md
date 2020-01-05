@@ -4,6 +4,48 @@
 
 ----------------------------------
 
+### [ 283. Move Zeroes ](https://leetcode.com/problems/k-diff-pairs-in-an-array/) - easy
+
+- 문제
+
+Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+- 제한사항
+  - You must do this in-place without making a copy of the array.
+  - Minimize the total number of operations.
+
+
+- 입출력 예
+  - Example 1:
+
+```
+Input: [0,1,0,3,12]
+Output: [1,3,12,0,0]
+```
+
+- 풀이
+  - array
+
+```C++
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int numsSize = nums.size(), count = 0;
+        for(int index = 0 ; index < numsSize - count;){
+            if(nums[index] == 0){
+                ++count;
+                nums.push_back(0);
+                nums.erase(nums.begin() + index);
+            }
+            else
+                ++index;
+        }
+    }
+};
+```
+
+----------------------------------
+
 ### [ K-diff Pairs in an Array ](https://leetcode.com/problems/k-diff-pairs-in-an-array/) - easy
 
 - 문제
