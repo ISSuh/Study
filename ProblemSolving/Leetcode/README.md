@@ -4,6 +4,65 @@
 
 ----------------------------------
 
+### [ 64. Minimum Path Sum ](https://leetcode.com/problems/minimum-path-sum/) - medium
+
+- 문제
+
+Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+
+Note: You can only move either down or right at any point in time.
+
+- 제한사항
+
+- 입출력 예
+  
+```
+Input:
+[
+  [1,3,1],
+  [1,5,1],
+  [4,2,1]
+]
+Output: 7
+Explanation: Because the path 1→3→1→1→1 minimizes the sum.
+```
+
+- 풀이
+  - DP
+
+```C++
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+
+        for(auto i = 0 ; i < m ; ++i){
+            for(auto j = 0 ; j < n ; ++j){
+                if(i == 0 && j == 0)
+                    continue;
+                // row, colum의 첫줄의 경로는 한가지 밖에 없음
+                if(i == 0 && j != 0){
+                    grid[i][j] += grid[i][j-1];    
+                }
+                else if(i !=0 && j == 0){
+                    grid[i][j] += grid[i-1][j];                        
+                }
+		// 경로는 위 또는 왼쪽에서 밖에 올수 없으므로,
+		// 둘중 작은 값을 선택
+                else{
+                    grid[i][j] += min(grid[i][j-1], grid[i-1][j]);
+                }
+            }
+        }
+        
+        return grid[m-1][n-1];
+    }
+};
+```
+
+----------------------------------
+
 ### [ 1277. Count Square Submatrices with All Ones ](https://leetcode.com/problems/count-square-submatrices-with-all-ones/) - medium
 
 - 문제
